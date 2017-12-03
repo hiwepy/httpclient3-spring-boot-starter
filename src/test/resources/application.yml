@@ -1,0 +1,27 @@
+httpclient:
+ connection:
+    #通过网络与服务器建立连接的超时时间。Httpclient包中通过一个异步线程去创建与服务器的socket连接，这就是该socket连接的超时时间(单位毫秒)，默认30000
+    connection-timeout: 60000
+    receive-buffer-size: 112
+    send-buffer-size: 1024
+    # 设置httpclient是否使用NoDelay策略;默认 true
+    tcp-no-delay: true
+    stale-checking-enabled: true 
+    so-timeout: 60000
+ connection-manager: 
+    connection-timeout: 60000
+    #每个HOST的最大连接数量
+    default-max-connections-per-host: 111 
+    #连接池的最大连接数
+    max-total-connections: 441
+    #socket接收数据的缓冲大小
+    receive-buffer-size: 1024
+    #socket发送数据的缓冲大小
+    send-buffer-size: 1024 
+    so-timeout: 5000
+    tcp-no-delay: true
+    timeout-interval: 10000
+    stale-checking-enabled: true 
+    type: simple
+  
+  
