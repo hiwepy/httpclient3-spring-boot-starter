@@ -26,7 +26,6 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 	protected static Logger LOG = LoggerFactory.getLogger(HttpClientUtils.class);
 	
 	
-	
 	public static HttpClient getCloseableHttpClient(HttpConnectionManager httpConnectionManager) {
 		HttpClient httpclient = null;
 		try {
