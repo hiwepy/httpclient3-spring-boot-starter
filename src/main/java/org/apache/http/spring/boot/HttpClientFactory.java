@@ -15,9 +15,53 @@
  */
 package org.apache.http.spring.boot;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpConnectionManager;
+import org.apache.commons.httpclient.SimpleHttpConnectionManager;
+import org.apache.http.spring.boot.httputils.HttpClientUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class HttpClientFactory {
 
+	protected static Logger LOG = LoggerFactory.getLogger(HttpClientFactory.class);
 	
+	/**
+	 * 普通http请求的HttpClient连接池
+	 */
+	private HttpConnectionManager httpConnectionManager = null;
+	private boolean userManager = true;
+
+	public HttpClientFactory(HttpConnectionManager httpConnectionManager) {
+		this(httpConnectionManager,  true);
+	}
+
+	public HttpClientFactory(HttpConnectionManager httpConnectionManager,
+			boolean userManager) {
+		this.httpConnectionManager = httpConnectionManager;
+		this.userManager = userManager;
+	}
+	
+	public HttpClient getCloseableHttpClient() {
+		HttpClient httpclient = null;
+		try {
+			httpclient = new HttpClient();
+			if (userManager) {
+				httpclient.setHttpConnectionManager(httpConnectionManager);
+			}
+			
+			// 设置读取超时时间(单位毫秒)
+			// httpClient.getParams().setParameter("http.socket.timeout",socket_timeout);
+			// 设置连接超时时间(单位毫秒)
+			// httpClient.getParams().setParameter("http.connection.timeout",connection_timeout);
+			// httpClient.getParams().setParameter("http.connection-manager.timeout",100000000L);
+		} catch (Exception e) {
+			LOG.error("Exception", e);
+			httpclient = new HttpClient();
+		}
+		httpclient.getHostConfiguration().getParams().setParameter("http.default-headers", getDefaultHeaders());
+		return httpclient;
+	}
 	
 	
 }

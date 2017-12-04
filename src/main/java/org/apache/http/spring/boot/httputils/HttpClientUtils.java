@@ -25,30 +25,6 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 
 	protected static Logger LOG = LoggerFactory.getLogger(HttpClientUtils.class);
 	
-	
-	public static HttpClient getCloseableHttpClient(HttpConnectionManager httpConnectionManager) {
-		HttpClient httpclient = null;
-		try {
-			httpclient = new HttpClient();
-			if (httpConnectionManager == null) {
-				httpConnectionManager = new SimpleHttpConnectionManager();
-			}
-			httpclient.setHttpConnectionManager(httpConnectionManager);
-			
-			// 设置读取超时时间(单位毫秒)
-			// httpClient.getParams().setParameter("http.socket.timeout",socket_timeout);
-			// 设置连接超时时间(单位毫秒)
-			// httpClient.getParams().setParameter("http.connection.timeout",connection_timeout);
-			// httpClient.getParams().setParameter("http.connection-manager.timeout",100000000L);
-			
-			
-		} catch (Exception e) {
-			LOG.error("Exception", e);
-			httpclient = new HttpClient();
-		}
-		httpclient.getHostConfiguration().getParams().setParameter("http.default-headers", getDefaultHeaders());
-		return httpclient;
-	}
 
 	public static <T> T httpRequestWithGet(String baseURL,ResponseHandler<T> handler) throws IOException {
 		return httpRequestWithGet(baseURL, null, handler);
