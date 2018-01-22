@@ -18,6 +18,6 @@
 </dependency>
 ```
 
-### Simple ：  
+### Sample ：  
 
-[https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-simple-httpclient3](https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-simple-httpclient3 "spring-boot-simple-httpclient3")
+[https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-sample-httpclient3](https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-sample-httpclient3 "spring-boot-sample-httpclient3")
