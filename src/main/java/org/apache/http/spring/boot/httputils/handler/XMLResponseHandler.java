@@ -19,7 +19,7 @@ import org.apache.http.spring.boot.httputils.exception.HttpResponseException;
  * 
  * @className: XMLResponseHandler
  * @description: http请求响应处理：返回org.w3c.dom.Document对象
- * @author : wandalong
+ * @author : vindell
  * @date : 下午01:43:19 2015-7-14
  * @modify by:
  * @modify date :
