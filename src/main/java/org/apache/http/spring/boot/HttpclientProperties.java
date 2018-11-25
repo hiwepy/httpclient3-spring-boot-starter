@@ -2,8 +2,8 @@ package org.apache.http.spring.boot;
 
 import java.util.Properties;
 
-import org.apache.http.spring.boot.property.HttpConnectionManagerProperties;
-import org.apache.http.spring.boot.property.HttpConnectionProperties;
+import org.apache.http.spring.boot.client.property.HttpConnectionManagerProperties;
+import org.apache.http.spring.boot.client.property.HttpConnectionProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 

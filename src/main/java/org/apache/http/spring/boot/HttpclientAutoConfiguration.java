@@ -1,12 +1,16 @@
 package org.apache.http.spring.boot;
 
+
+import javax.net.ssl.SSLContext;
+import javax.security.cert.X509Certificate;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpConnectionManager;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.util.IdleConnectionTimeoutThread;
-import org.apache.http.spring.boot.property.HttpConnectionManagerProperties;
-import org.apache.http.spring.boot.property.HttpConnectionManagerProperties.ManagerType;
+import org.apache.http.spring.boot.client.property.HttpConnectionManagerProperties;
+import org.apache.http.spring.boot.client.property.HttpConnectionManagerProperties.ManagerType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -49,25 +53,13 @@ public class HttpclientAutoConfiguration {
 			if (ManagerType.MULTI_THREADED.equals(mgrProps.getType())) {
 				return new MultiThreadedHttpConnectionManager();
 			}
+			
 			return new SimpleHttpConnectionManager(mgrProps.isAlwaysClose());
 		} catch (Exception e) {
 			LOG.error(e.getLocalizedMessage());
 		}
 		return null;
 	}
-	
-	
-	TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
-
-	SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
-			.loadTrustMaterial(null, acceptingTrustStrategy)
-			.build();
-
-	SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
-
-	CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(csf).build();
-
-	
 	
 
 }
