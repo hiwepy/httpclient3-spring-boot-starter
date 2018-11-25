@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.httputils.multipart;
+package org.apache.http.spring.boot.client.multipart;
 
 import java.io.IOException;
 import java.io.InputStream;

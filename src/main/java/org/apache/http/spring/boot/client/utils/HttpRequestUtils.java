@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.httputils;
+package org.apache.http.spring.boot.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +27,9 @@ import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
-import org.apache.http.spring.boot.httputils.exception.HttpResponseException;
-import org.apache.http.spring.boot.httputils.multipart.InputStreamPartSource;
-import org.apache.http.spring.boot.utils.FilemimeUtils;
+import org.apache.http.spring.boot.client.ContentType;
+import org.apache.http.spring.boot.client.exception.HttpResponseException;
+import org.apache.http.spring.boot.client.multipart.InputStreamPartSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

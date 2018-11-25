@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 public class HttpclientAutoConfiguration {
 
 	protected static Logger LOG = LoggerFactory.getLogger(HttpclientAutoConfiguration.class);
-
+	
 	@Bean
 	public IdleConnectionTimeoutThread heartbeatThread(HttpclientProperties properties,
 			HttpConnectionManager httpConnectionManager) {
@@ -55,5 +55,19 @@ public class HttpclientAutoConfiguration {
 		}
 		return null;
 	}
+	
+	
+	TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
+
+	SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
+			.loadTrustMaterial(null, acceptingTrustStrategy)
+			.build();
+
+	SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
+
+	CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(csf).build();
+
+	
+	
 
 }

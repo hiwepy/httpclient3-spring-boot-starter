@@ -1,4 +1,4 @@
- package org.apache.http.spring.boot.httputils.handler;
+ package org.apache.http.spring.boot.client.handler;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import org.apache.commons.httpclient.StatusLine;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import org.apache.http.spring.boot.httputils.exception.HttpResponseException;
+import org.apache.http.spring.boot.client.exception.HttpResponseException;
 
 /**
  * 

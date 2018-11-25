@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.httputils.handler;
+package org.apache.http.spring.boot.client.handler;
 
 import java.io.IOException;
 

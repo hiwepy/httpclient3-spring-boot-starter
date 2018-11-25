@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.httputils;
+package org.apache.http.spring.boot.utils;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -17,7 +17,8 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.apache.http.spring.boot.httputils.handler.ResponseHandler;
+import org.apache.http.spring.boot.client.ContentType;
+import org.apache.http.spring.boot.client.handler.ResponseHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.httputils;
+package org.apache.http.spring.boot.utils;
 
 import java.io.File;
 import java.util.Iterator;

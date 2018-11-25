@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.httputils;
+package org.apache.http.spring.boot.utils;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpMethodBase;

@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.httputils.handler;
+package org.apache.http.spring.boot.client.handler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,16 +8,16 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.StatusLine;
-import org.apache.commons.io.IOUtils;
+import org.apache.http.spring.boot.client.ContentType;
+import org.apache.http.spring.boot.client.exception.HttpResponseException;
+import org.apache.http.spring.boot.client.utils.HttpResponeUtils;
+import org.apache.http.spring.boot.client.utils.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.http.spring.boot.httputils.ContentType;
-import org.apache.http.spring.boot.httputils.HttpResponeUtils;
-import org.apache.http.spring.boot.httputils.exception.HttpResponseException;
 
 /**
  * 

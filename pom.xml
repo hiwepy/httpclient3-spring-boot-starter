@@ -365,7 +365,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<commons-httpclient.version>3.1</commons-httpclient.version>
+		<commons-net.version>3.6</commons-net.version>
 		<commons-not-yet-ssl.version>0.3.9</commons-not-yet-ssl.version>
+		<dom4j.version>2.1.1</dom4j.version>
+		<fastjson.version>1.2.53</fastjson.version>
+		<guava.version>26.0-jre</guava.version>
 		<maven.version>3.0</maven.version>
        	<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
@@ -373,8 +377,68 @@
         <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
         <maven-surefire-plugin.vertsion>2.21.0</maven-surefire-plugin.vertsion>
 		<maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
+		<metrics.version>4.0.3</metrics.version>
+		<xstream.version>1.4.11.1</xstream.version>
 	</properties>
-
+	
+	<dependencyManagement>
+		<dependencies>
+			<!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
+			<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>${commons-httpclient.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/not-yet-commons-ssl -->
+			<!-- 
+				Not-Yet-Commons-SSL是Apache许可证下的一款Java类库，它提供易于使用的API，并支持各种各样的证书格式和配置选项，来达到简化SSL的使用的目的。
+				尤其是，它允许在单个JVM中使用多个证书，优雅地处理自签名证书，以及支持所有标准的证书格式，从而解决了一些长期以来一直存在的Java内建的SSL支持问题。
+				详情参见：http://www.infoq.com/cn/news/2007/06/not-yet-commons-ssl
+			 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>not-yet-commons-ssl</artifactId>
+				<version>${commons-not-yet-ssl.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
+			<dependency>
+			    <groupId>commons-net</groupId>
+			    <artifactId>commons-net</artifactId>
+			    <version>${commons-net.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.dom4j/dom4j -->
+			<dependency>
+			    <groupId>org.dom4j</groupId>
+			    <artifactId>dom4j</artifactId>
+			    <version>${dom4j.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>fastjson</artifactId>
+			    <version>${fastjson.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+			<dependency>
+			    <groupId>com.google.guava</groupId>
+			    <artifactId>guava</artifactId>
+			    <version>${guava.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-core -->
+			<dependency>
+	            <groupId>io.dropwizard.metrics</groupId>
+	            <artifactId>metrics-core</artifactId>
+	            <version>${metrics.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+			<dependency>
+			    <groupId>com.thoughtworks.xstream</groupId>
+			    <artifactId>xstream</artifactId>
+			    <version>${xstream.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
 
 		<!-- Java Servlet API -->
@@ -387,6 +451,12 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- Core starter, including auto-configuration support, logging and YAML -->
@@ -411,66 +481,45 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-autoconfigure</artifactId>
 		</dependency>
-
+	
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
-			<version>${commons-httpclient.version}</version>
 		</dependency>
-		<!-- 
-			Not-Yet-Commons-SSL是Apache许可证下的一款Java类库，它提供易于使用的API，并支持各种各样的证书格式和配置选项，来达到简化SSL的使用的目的。
-			尤其是，它允许在单个JVM中使用多个证书，优雅地处理自签名证书，以及支持所有标准的证书格式，从而解决了一些长期以来一直存在的Java内建的SSL支持问题。
-			详情参见：http://www.infoq.com/cn/news/2007/06/not-yet-commons-ssl
-		 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>not-yet-commons-ssl</artifactId>
-			<version>${commons-not-yet-ssl.version}</version>
 		</dependency>
-
+		<dependency>
+		    <groupId>commons-net</groupId>
+		    <artifactId>commons-net</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-text</artifactId>
-			<version>1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.6</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-		<dependency>
-		    <groupId>com.google.guava</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>23.5-jre</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.41</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.dom4j/dom4j -->
+		
 		<dependency>
 			<groupId>org.dom4j</groupId>
 			<artifactId>dom4j</artifactId>
-			<version>2.1.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
 		<dependency>
-		    <groupId>com.thoughtworks.xstream</groupId>
-		    <artifactId>xstream</artifactId>
-		    <version>1.4.10</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-httpasyncclient -->
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		</dependency>
 		<dependency>
 		    <groupId>io.dropwizard.metrics</groupId>
 		    <artifactId>metrics-core</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>com.thoughtworks.xstream</groupId>
+		    <artifactId>xstream</artifactId>
+		</dependency>
+		
 
 	</dependencies>
 

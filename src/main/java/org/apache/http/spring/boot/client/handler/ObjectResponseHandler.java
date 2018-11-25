@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.httputils.handler;
+package org.apache.http.spring.boot.client.handler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,9 +7,9 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.StatusLine;
-import org.apache.commons.io.IOUtils;
+import org.apache.http.spring.boot.client.exception.HttpResponseException;
+import org.apache.http.spring.boot.client.utils.IOUtils;
 
-import org.apache.http.spring.boot.httputils.exception.HttpResponseException;
 import com.thoughtworks.xstream.XStream;
 
 public class ObjectResponseHandler implements ResponseHandler<Object> {
