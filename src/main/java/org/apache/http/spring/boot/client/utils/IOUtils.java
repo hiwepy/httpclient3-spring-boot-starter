@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.apache.http.spring.boot.utils;
+package org.apache.http.spring.boot.client.utils;
 
 import java.io.Closeable;
 import java.io.IOException;

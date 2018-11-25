@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.apache.http.spring.boot.property;
+package org.apache.http.spring.boot.client.property;
 
 import java.util.NoSuchElementException;
 
