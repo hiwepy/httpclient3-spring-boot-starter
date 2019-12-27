@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @className	： HttpRequestUtils
  * @description	： HttpClient请求准备处理工具；如 构建URL,处理参数
- * @author 		： <a href="https://github.com/vindell">vindell</a>
+ * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  * @date		： 2017年12月3日 下午9:45:51
  * @version 	V1.0
  */

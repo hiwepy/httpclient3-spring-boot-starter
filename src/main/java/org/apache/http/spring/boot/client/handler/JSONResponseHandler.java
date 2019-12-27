@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSONObject;
  * 
  * @className: JSONResponseHandler
  * @description: http请求响应处理：返回JSONObject对象
- * @author : vindell
+ * @author : hiwepy
  * @date : 下午12:48:53 2015-7-14
  * @modify by:
  * @modify date :

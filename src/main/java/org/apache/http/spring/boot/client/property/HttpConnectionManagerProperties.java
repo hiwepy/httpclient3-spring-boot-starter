@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, vindell (https://github.com/vindell).
+ * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -103,7 +103,7 @@ public class HttpConnectionManagerProperties extends HttpConnectionManagerParams
 	/**
 	 * 
 	 * @description	： 处理默认参数
-	 * @author 		： <a href="https://github.com/vindell">vindell</a>
+	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
 	 * @date 		：2017年12月3日 下午9:13:14
 	 * @return
 	 */
