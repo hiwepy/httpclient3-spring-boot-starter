@@ -368,8 +368,8 @@
 		<commons-net.version>3.6</commons-net.version>
 		<commons-not-yet-ssl.version>0.3.9</commons-not-yet-ssl.version>
 		<dom4j.version>2.1.1</dom4j.version>
-		<fastjson.version>1.2.61</fastjson.version>
-		<guava.version>26.0-jre</guava.version>
+		<fastjson.version>1.2.75</fastjson.version>
+		<guava.version>30.0-jre</guava.version>
 		<maven.version>3.0</maven.version>
        	<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
