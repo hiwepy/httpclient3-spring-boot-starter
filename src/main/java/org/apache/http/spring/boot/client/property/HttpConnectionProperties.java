@@ -22,7 +22,7 @@ public class HttpConnectionProperties extends HttpConnectionParams {
 	/**
 	 * 
 	 * @description	： 处理默认参数
-	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author [@Loong Wan](https://github.com/loong10k)
 	 * @date 		：2017年12月3日 下午9:13:14
 	 * @return
 	 */
