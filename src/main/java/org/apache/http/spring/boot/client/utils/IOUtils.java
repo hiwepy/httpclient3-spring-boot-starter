@@ -22,7 +22,7 @@ import java.io.OutputStream;
 
 /**
  * TODO
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class IOUtils {
 
