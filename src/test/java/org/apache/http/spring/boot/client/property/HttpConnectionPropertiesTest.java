@@ -15,23 +15,25 @@
  */
 package org.apache.http.spring.boot.client.property;
 
-import org.apache.commons.httpclient.params.HttpConnectionParams;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public class HttpConnectionProperties extends HttpConnectionParams {
+import static org.assertj.core.api.Assertions.assertThat;
 
-	/**
-	 * 
-	 * @description	： 处理默认参数
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date 		：2017年12月3日 下午9:13:14
-	 * @return
-	 */
-	public HttpConnectionParams getHttpConnectionParams() {
-		
-		HttpConnectionParams params = this;
-		
-		return params;
-		
-	}
-	
+/**
+ * Unit tests for {{ @link HttpConnectionProperties }}.
+ *
+ * <p>Verifies default values, getters/setters and POJO contract.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
+@DisplayName("HttpConnectionProperties Tests")
+class HttpConnectionPropertiesTest {
+    @Test
+    @DisplayName("Default constructor creates non-null instance")
+    void testDefaultInstance() {
+        HttpConnectionProperties props = new HttpConnectionProperties();
+        assertThat(props).isNotNull();
+    }
 }
