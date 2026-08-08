@@ -13,25 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.apache.http.spring.boot.client.property;
+package org.apache.http.spring.boot;
 
-import org.apache.commons.httpclient.params.HttpConnectionParams;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public class HttpConnectionProperties extends HttpConnectionParams {
+import static org.assertj.core.api.Assertions.assertThat;
 
-	/**
-	 * 
-	 * @description	： 处理默认参数
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date 		：2017年12月3日 下午9:13:14
-	 * @return
-	 */
-	public HttpConnectionParams getHttpConnectionParams() {
-		
-		HttpConnectionParams params = this;
-		
-		return params;
-		
-	}
-	
+/**
+ * Unit tests for {{ @link HttpClientFactory }}.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
+@DisplayName("HttpClientFactory Tests")
+class HttpClientFactoryTest {
+
+    @Test
+    @DisplayName("Instance can be created via constructor")
+    void testInstantiation() {
+        HttpClientFactory instance = new HttpClientFactory(null);
+        assertThat(instance).isNotNull();
+    }
 }
