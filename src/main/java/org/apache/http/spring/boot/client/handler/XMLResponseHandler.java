@@ -16,17 +16,16 @@ import org.xml.sax.SAXException;
 import org.apache.http.spring.boot.client.exception.HttpResponseException;
 
 /**
- * 
- * @className: XMLResponseHandler
- * @description: http请求响应处理：返回org.w3c.dom.Document对象
+ * {@link ResponseHandler} implementation that parses the response body into a DOM
+ * {@link Document}.
+ * <p>A {@link HttpResponseException} is thrown when the status code is outside the 2xx range
+ * or the XML is malformed.</p>
  * @author [@Loong Wan](https://github.com/loong10k)
- * @date : 下午01:43:19 2015-7-14
- * @modify by:
- * @modify date :
- * @modify description :
+ * @since 1.0.0
  */
 public class XMLResponseHandler implements ResponseHandler<Document> {
 
+	/** Factory used to create the {@link DocumentBuilder} that parses the response body. */
 	private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	
 	@Override
@@ -34,6 +33,12 @@ public class XMLResponseHandler implements ResponseHandler<Document> {
 		
 	}
 	
+	/**
+	 * Parse the response body into a DOM {@link Document}.
+	 * @param httpMethod the executed HTTP method
+	 * @return the parsed {@link Document}
+	 * @throws IOException if the status is not 2xx or the XML is malformed
+	 */
 	@Override
     public Document handleResponse(HttpMethodBase httpMethod) throws IOException {
 		StatusLine statusLine = httpMethod.getStatusLine();

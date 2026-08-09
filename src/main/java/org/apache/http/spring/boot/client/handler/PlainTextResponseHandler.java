@@ -9,6 +9,13 @@ import org.apache.commons.httpclient.StatusLine;
 
 import org.apache.http.spring.boot.client.exception.HttpResponseException;
 
+/**
+ * {@link ResponseHandler} implementation that returns the response body as a plain
+ * {@link String}.
+ * <p>A {@link HttpResponseException} is thrown when the status code is outside the 2xx range.</p>
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class PlainTextResponseHandler implements ResponseHandler<String> {
 
 	@Override
@@ -16,6 +23,12 @@ public class PlainTextResponseHandler implements ResponseHandler<String> {
 		
 	}
 
+	/**
+	 * Return the response body as a {@link String}.
+	 * @param httpMethod the executed HTTP method
+	 * @return the response body as a string
+	 * @throws IOException if the status is not 2xx or reading the body fails
+	 */
 	@Override
 	public String handleResponse(HttpMethodBase httpMethod) throws IOException {
 		StatusLine statusLine = httpMethod.getStatusLine();

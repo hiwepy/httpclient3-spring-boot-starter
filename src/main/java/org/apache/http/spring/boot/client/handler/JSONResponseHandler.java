@@ -20,19 +20,17 @@ import org.dom4j.io.SAXReader;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * 
- * @className: JSONResponseHandler
- * @description: http请求响应处理：返回JSONObject对象
+ * {@link ResponseHandler} implementation that converts the response body into a
+ * {@link JSONObject}. XML responses ({@code application/xml}) are parsed into a JSON object
+ * tree, JSON responses ({@code application/json}) are parsed directly, and any other content
+ * type produces an {@link HttpResponseException}.
  * @author [@Loong Wan](https://github.com/loong10k)
- * @date : 下午12:48:53 2015-7-14
- * @modify by:
- * @modify date :
- * @modify description :
+ * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
 public class JSONResponseHandler implements ResponseHandler<JSONObject> {
 
-	// 读取输入流
+	/** SAX reader used to parse XML response bodies. */
 	protected SAXReader reader = new SAXReader();
 	
 	@Override
@@ -40,6 +38,13 @@ public class JSONResponseHandler implements ResponseHandler<JSONObject> {
 		
 	}
 	
+	/**
+	 * Convert the response body into a {@link JSONObject}. XML bodies are parsed and converted
+	 * into a JSON object tree; JSON bodies are parsed directly.
+	 * @param httpMethod the executed HTTP method
+	 * @return the response parsed into a {@link JSONObject}
+	 * @throws IOException if the status is not 2xx, the content type is unexpected, or parsing fails
+	 */
 	@Override
 	public JSONObject handleResponse(HttpMethodBase httpMethod) throws IOException {
 		StatusLine statusLine = httpMethod.getStatusLine();
@@ -86,6 +91,11 @@ public class JSONResponseHandler implements ResponseHandler<JSONObject> {
 		}
 	}
 
+	/**
+	 * Recursively convert a list of XML {@link Element}s into a nested {@link JSONObject}.
+	 * @param childElements the child elements to convert
+	 * @return the resulting {@link JSONObject}
+	 */
 	private static JSONObject parseJSONObject(List<Element> childElements) {
 		// 将解析结果存储在JSONObject中
 		JSONObject resultXML = new JSONObject();

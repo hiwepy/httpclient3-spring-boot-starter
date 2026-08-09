@@ -11,8 +11,24 @@ import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.httpclient.util.URIUtil;
 
+/**
+ * Helpers for working with URLs and query strings in Commons HttpClient 3.x requests: merging
+ * in-URL query parameters with an additional parameter map, URL-encoding values and building
+ * {@link NameValuePair} lists.
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public abstract class HttpURIUtils {
 
+	/**
+	 * Merge the in-URL query string of {@code baseURL} with the supplied parameter map and
+	 * return the resulting URL-encoded string.
+	 * @param baseURL the target URL
+	 * @param paramsMap additional parameters to append, may be {@code null}
+	 * @param charset the charset used to encode the resulting query string
+	 * @return the merged URL, or {@code baseURL} when no parameters are present
+	 * @throws URIException if the URL cannot be parsed
+	 */
 	public static String buildURL(String baseURL, Map<String, Object> paramsMap,String charset) throws URIException {
 		if (paramsMap == null) {
 			return baseURL;
@@ -34,14 +50,12 @@ public abstract class HttpURIUtils {
 	}
 	
 	/**
-	 * 
-	 * @description	：构建普通参数集合
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date 		：Jun 30, 2015 6:57:06 PM
-	 * @param baseURL
-	 * @param paramsMap
-	 * @return
-	 * @throws URIException 
+	 * Build a list of {@link NameValuePair} objects from the supplied parameter map (ignoring
+	 * {@link File} and {@code byte[]} values) and the in-URL query string of {@code baseURL}.
+	 * @param baseURL the target URL whose in-URL query parameters should be merged
+	 * @param paramsMap additional parameters to include, may be {@code null}
+	 * @return a list of {@link NameValuePair} objects
+	 * @throws URIException if the URL cannot be parsed
 	 */
 	public static List<NameValuePair> buildNameValuePairs(String baseURL, Map<String, Object> paramsMap) throws URIException {
     	//初始参数集合对象
@@ -69,6 +83,13 @@ public abstract class HttpURIUtils {
         return nameValueList;
     }
 	
+	/**
+	 * Parse the in-URL query string of {@code baseURL} into a list of {@link NameValuePair}
+	 * objects. Returns an empty list when the URL has no query string.
+	 * @param baseURL the target URL whose query string should be parsed
+	 * @return a list of {@link NameValuePair} objects, possibly empty
+	 * @throws URIException if the URL cannot be parsed
+	 */
 	public static List<NameValuePair> buildNameValuePairs(String baseURL) throws URIException {
     	//初始参数集合对象
     	List<NameValuePair> nameValueList    = new LinkedList<NameValuePair>();

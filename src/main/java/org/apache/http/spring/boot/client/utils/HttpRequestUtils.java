@@ -34,19 +34,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
- * @className	： HttpRequestUtils
- * @description	： HttpClient请求准备处理工具；如 构建URL,处理参数
+ * Helpers for preparing Commons HttpClient 3.x requests: building URLs, encoding parameters,
+ * assembling default/custom headers, constructing {@link RequestEntity} bodies (including
+ * multipart uploads) and detecting redirect or gzip responses.
  * @author [@Loong Wan](https://github.com/loong10k)
- * @date		： 2017年12月3日 下午9:45:51
- * @version 	V1.0
+ * @since 1.0.0
  */
 public abstract class HttpRequestUtils {
 	
 	protected static Logger LOG = LoggerFactory.getLogger(HttpRequestUtils.class);
 
 	/**
-	 *  构建对象参数集合，如上传文件
+	 * Build a map of {@link RequestEntity} bodies from a parameter map, handling {@link File},
+	 * {@link InputStream}, {@code byte[]} and {@link String} values.
+	 * @param paramsMap the parameter map to inspect
+	 * @return a map of parameter name to {@link RequestEntity}
+	 * @throws IOException if a body cannot be constructed
 	 */
 	public static Map<String, RequestEntity> buildRequestEntity(Map<String, Object> paramsMap) throws IOException {
 		Map<String, RequestEntity> contentBodies = new HashMap<String, RequestEntity>();
@@ -81,6 +84,10 @@ public abstract class HttpRequestUtils {
 	}
 	
 
+	/**
+	 * Return the default browser-like request headers used by this helper.
+	 * @return a mutable list of default {@link Header} objects
+	 */
 	public static List<Header> getDefaultHeaders() {
 		List<Header> headers = new ArrayList<Header>();
 		//设置默认请求头信息
@@ -93,6 +100,12 @@ public abstract class HttpRequestUtils {
 		return headers;
 	}
 	
+	/**
+	 * Return the default headers augmented with an {@code X-Forwarded-For} header carrying the
+	 * given client IP.
+	 * @param ip the client IP to set as {@code X-Forwarded-For}
+	 * @return a mutable list of {@link Header} objects
+	 */
 	public static List<Header> getHeaders(String ip) {
 		List<Header> headers = getDefaultHeaders();
 		headers.add(new Header(HttpHeaders.X_FORWARDED_FOR, ip));
@@ -102,6 +115,14 @@ public abstract class HttpRequestUtils {
 		return headers;
 	}
 	
+	/**
+	 * Apply the default browser-like request headers, then overlay any user-supplied headers,
+	 * to the given HTTP method and return it.
+	 * @param httpRequest the method to configure
+	 * @param headers additional request headers, may be {@code null}
+	 * @param <T> the concrete method type
+	 * @return the configured method
+	 */
 	public static <T extends HttpMethodBase> T getHttpRequest(T httpRequest,Map<String, String> headers) {
 		//设置默认请求头信息
 		/*Accept表示浏览器支持的 MIME 类型；
@@ -149,18 +170,45 @@ public abstract class HttpRequestUtils {
         return httpRequest;
 	}
     
+	/**
+	 * Build a {@link GetMethod} for the given URL, ignoring any in-URL query string and applying
+	 * the supplied headers.
+	 * @param baseURL the target URL (query string is discarded)
+	 * @param charset the request charset
+	 * @param headers additional request headers, may be {@code null}
+	 * @return a configured {@link GetMethod}
+	 */
 	public static GetMethod getHttpGet(String baseURL, String charset,Map<String, String> headers) {
 		String[] paramStr = baseURL.split("[?]", 2);
 		GetMethod httpGet = new GetMethod(paramStr[0]);
         return getHttpRequest(httpGet,headers);
 	}
  
+	/**
+	 * Build a {@link PostMethod} for the given URL, ignoring any in-URL query string and
+	 * applying the supplied headers.
+	 * @param baseURL the target URL (query string is discarded)
+	 * @param charset the request charset
+	 * @param headers additional request headers, may be {@code null}
+	 * @return a configured {@link PostMethod}
+	 */
 	public static PostMethod getHttpPost(String baseURL, String charset,Map<String, String> headers) {
 		String[] paramStr = baseURL.split("[?]", 2);
 		PostMethod httpPost  = new PostMethod(paramStr[0]); 
 		return getHttpRequest(httpPost,headers);
 	}
 	
+	/**
+	 * Inspect the given status code and, when it indicates a redirect, build a new GET or POST
+	 * method targeting the {@code location} response header.
+	 * @param httpMethod the previously executed method
+	 * @param statuscode the status code returned by the previous execution
+	 * @param charset the charset used to encode the redirected request
+	 * @param headers additional request headers, may be {@code null}
+	 * @param <T> the concrete method type
+	 * @return a new method targeting the redirect URL, or {@code null} when no redirect applies
+	 * @throws HttpResponseException if a redirect response carries no {@code location} header
+	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends HttpMethodBase> T getHttpRedirect(T httpMethod,int statuscode, String charset,
 			Map<String, String> headers) throws HttpResponseException {
@@ -190,6 +238,17 @@ public abstract class HttpRequestUtils {
 		return null;
 	}
 	
+	/**
+	 * Build a {@link MultipartRequestEntity} from the given parameter map when it contains at
+	 * least one file, input stream or byte-array value; otherwise return {@code null}.
+	 * @param httpRequest the method whose parameters seed the multipart body
+	 * @param baseURL the original target URL
+	 * @param paramsMap the parameter map to inspect
+	 * @param charset the charset used for string parts
+	 * @return a configured {@link MultipartRequestEntity}, or {@code null} when the map has no
+	 *         binary payload
+	 * @throws IOException if a part cannot be constructed
+	 */
 	public static MultipartRequestEntity getHttpEntity(HttpMethodBase httpRequest,String baseURL, Map<String, Object> paramsMap,String charset) throws IOException{
     	//有实体对象参数，表示可能有文件上传
     	if(HttpRequestUtils.isMultipart(paramsMap)){
@@ -232,6 +291,17 @@ public abstract class HttpRequestUtils {
     	return null;
 	}
 	
+	/**
+	 * Configure a {@link PostMethod} with the supplied {@code Content-Type} header and request
+	 * body, switching to a multipart body when the parameter map contains a binary payload.
+	 * @param httpMethod the POST method to configure
+	 * @param baseURL the original target URL
+	 * @param paramsMap the parameter map to send
+	 * @param charset the charset used to encode the body
+	 * @param contentType the {@code Content-Type} header value, may be {@code null}
+	 * @param headers additional request headers, may be {@code null}
+	 * @throws IOException if the body cannot be constructed
+	 */
 	public static void setHttpMethod(PostMethod httpMethod,String baseURL,
 			Map<String, Object> paramsMap, String charset, String contentType,
 			Map<String, String> headers) throws IOException {
@@ -255,6 +325,13 @@ public abstract class HttpRequestUtils {
 		}
 	}
 	
+	/**
+	 * Return {@code true} when the parameter map contains at least one {@link File},
+	 * {@link InputStream} or {@code byte[]} value, indicating that a multipart body is
+	 * required.
+	 * @param paramsMap the parameter map to inspect
+	 * @return {@code true} when a multipart body is required
+	 */
 	public static boolean isMultipart(Map<String, Object> paramsMap){
 		boolean isMultipart = false;
 		if(paramsMap != null && !paramsMap.isEmpty()){
@@ -275,6 +352,11 @@ public abstract class HttpRequestUtils {
 	}
 	 
 	
+	/**
+	 * Return {@code true} when the request advertises {@code Accept-Encoding: gzip}.
+	 * @param httpMethod the method whose request headers should be inspected
+	 * @return {@code true} when gzip is requested
+	 */
 	public static boolean isGzip(HttpMethodBase httpMethod) {
 		boolean isGzip = false;
 		Header[] headers = httpMethod.getRequestHeaders(HttpHeaders.ACCEPT_ENCODING);

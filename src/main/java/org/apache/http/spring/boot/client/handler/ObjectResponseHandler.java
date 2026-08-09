@@ -12,8 +12,16 @@ import org.apache.http.spring.boot.client.utils.IOUtils;
 
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * {@link ResponseHandler} implementation that deserialises an XML response body into a Java
+ * object graph using XStream.
+ * <p>A {@link HttpResponseException} is thrown when the status code is outside the 2xx range.</p>
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class ObjectResponseHandler implements ResponseHandler<Object> {
 
+	/** XStream instance used to deserialise the XML response body. */
 	protected XStream xstream = new XStream();
 	
 	@Override
@@ -21,6 +29,12 @@ public class ObjectResponseHandler implements ResponseHandler<Object> {
 		
 	}
 	
+	/**
+	 * Deserialise the response body into a Java object graph.
+	 * @param httpMethod the executed HTTP method
+	 * @return the deserialised object
+	 * @throws IOException if the status is not 2xx or reading the body fails
+	 */
 	@Override
 	public Object handleResponse(HttpMethodBase httpMethod) throws IOException {
 		StatusLine statusLine = httpMethod.getStatusLine();

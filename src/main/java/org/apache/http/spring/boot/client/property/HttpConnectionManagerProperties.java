@@ -21,15 +21,29 @@ import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
+/**
+ * Extended {@link HttpConnectionManagerParams} bound under
+ * {@code httpclient.connection-manager}, exposing the connection-manager type, idle-eviction
+ * interval and the {@code alwaysClose} flag in addition to the standard pool/socket tuning
+ * parameters.
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HttpConnectionManagerProperties extends HttpConnectionManagerParams {
 
-	public static final String TIMEOUT_INTERVAL = "http.timeout.interval"; 
-	//定时清除失效连接心跳线程执行周期(单位毫秒)，默认5000
+	/** Parameter key for the idle-connection-eviction interval. */
+	public static final String TIMEOUT_INTERVAL = "http.timeout.interval";
+	/** Default idle-connection-eviction interval, in milliseconds (5000). */
 	public static final int  DEFAULT_TIMEOUT_INTERVAL = 5000;
 	
+	/**
+	 * Enumeration of supported connection-manager types.
+	 */
 	public enum ManagerType {
 
-		MULTI_THREADED("multi-threaded"), 
+		/** Multi-threaded connection manager that pools connections across threads. */
+		MULTI_THREADED("multi-threaded"),
+		/** Simple connection manager intended for single-threaded use. */
 		SIMPLE("simple");
 
 		private final String type;
@@ -38,18 +52,38 @@ public class HttpConnectionManagerProperties extends HttpConnectionManagerParams
 			this.type = type;
 		}
 
+		/**
+		 * Return the string representation of this type.
+		 * @return the type name
+		 */
 		public String get() {
 			return type;
 		}
 		
+		/**
+		 * Return {@code true} when this type equals the given enum value.
+		 * @param type the value to compare with
+		 * @return {@code true} if the values are equal
+		 */
 		public boolean equals(ManagerType type){
 			return this.compareTo(type) == 0;
 		}
 		
+		/**
+		 * Return {@code true} when this type matches the given string value (case-insensitive).
+		 * @param type the string value to compare with
+		 * @return {@code true} if the values are equal
+		 */
 		public boolean equals(String type){
 			return this.compareTo(ManagerType.valueOfIgnoreCase(type)) == 0;
 		}
 		
+		/**
+		 * Look up a {@link ManagerType} by its string key, ignoring case.
+		 * @param key the string key to resolve
+		 * @return the matching {@link ManagerType}
+		 * @throws NoSuchElementException if no type matches the given key
+		 */
 		public static ManagerType valueOfIgnoreCase(String key) {
 			for (ManagerType type : ManagerType.values()) {
 				if(type.get().equalsIgnoreCase(key)) {
@@ -66,34 +100,54 @@ public class HttpConnectionManagerProperties extends HttpConnectionManagerParams
     private boolean alwaysClose = false;
     
     /**
-	 * @return the timeoutInterval
+	 * Return the interval, in milliseconds, at which idle connections are evicted.
+	 * @return the idle-eviction interval
 	 */
 	public int getTimeoutInterval() {
 		return getIntParameter(TIMEOUT_INTERVAL,DEFAULT_TIMEOUT_INTERVAL);
 	}
 	
 	/**
-	 * @param timeoutInterval the timeoutInterval to set
+	 * Set the interval, in milliseconds, at which idle connections are evicted.
+	 * @param timeoutInterval the idle-eviction interval
 	 */
 	public void setTimeoutInterval(int timeoutInterval) {
 		 setIntParameter(TIMEOUT_INTERVAL,timeoutInterval);
 	}
 	
 	
+	/**
+	 * Return the type of connection manager to create.
+	 * @return the connection-manager type
+	 */
 	public ManagerType getType() {
 		return type;
 	}
 
+	/**
+	 * Set the type of connection manager to create.
+	 * @param type the connection-manager type
+	 */
 	public void setType(ManagerType type) {
 		this.type = type;
 	}
 
+	/**
+	 * Return whether a {@link SimpleHttpConnectionManager} should always close its underlying
+	 * connection.
+	 * @return {@code true} to always close the connection
+	 */
 	public boolean isAlwaysClose() {
 		return alwaysClose;
 	}
 
 
 
+	/**
+	 * Set whether a {@link SimpleHttpConnectionManager} should always close its underlying
+	 * connection.
+	 * @param alwaysClose {@code true} to always close the connection
+	 */
 	public void setAlwaysClose(boolean alwaysClose) {
 		this.alwaysClose = alwaysClose;
 	}
@@ -101,11 +155,10 @@ public class HttpConnectionManagerProperties extends HttpConnectionManagerParams
 
 
 	/**
-	 * 
-	 * @description	： 处理默认参数
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date 		：2017年12月3日 下午9:13:14
-	 * @return
+	 * Apply sensible defaults for socket and pool parameters (TCP no-delay, 30s connect
+	 * timeout, 60s read timeout, 1MB send/receive buffers, 20 connections per host and 60 total
+	 * connections) and return this instance for chaining.
+	 * @return this instance with defaults applied
 	 */
 	public HttpConnectionManagerProperties getInitedParams() {
 		

@@ -22,27 +22,78 @@ import org.apache.http.spring.boot.client.handler.ResponseHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Convenience helpers for executing GET and POST requests with Commons HttpClient 3.x.
+ * <p>
+ * Each {@code httpRequestWith*} method creates an {@link HttpClient}, applies the supplied
+ * {@link ResponseHandler} for client pre-processing, follows up to one redirect, processes the
+ * final response through the handler and unconditionally releases the connection.</p>
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public abstract class HttpClientUtils extends HttpRequestUtils {
 
 	protected static Logger LOG = LoggerFactory.getLogger(HttpClientUtils.class);
 	
 
+	/**
+	 * Execute a GET request against {@code baseURL} with no parameters and process the response
+	 * with {@code handler}.
+	 * @param baseURL the target URL
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
+	 */
 	public static <T> T httpRequestWithGet(String baseURL,ResponseHandler<T> handler) throws IOException {
 		return httpRequestWithGet(baseURL, null, handler);
 	}
 
+	/**
+	 * Execute a GET request against {@code baseURL} with the given parameters (UTF-8 charset)
+	 * and process the response with {@code handler}.
+	 * @param baseURL the target URL
+	 * @param paramsMap the query parameters to append
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
+	 */
 	public static <T> T httpRequestWithGet(String baseURL,
 			Map<String, Object> paramsMap, ResponseHandler<T> handler)
 			throws IOException {
 		return httpRequestWithGet(baseURL, paramsMap, ContentType.UTF_8, handler);
 	}
 
+	/**
+	 * Execute a GET request against {@code baseURL} with the given parameters and charset and
+	 * process the response with {@code handler}.
+	 * @param baseURL the target URL
+	 * @param paramsMap the query parameters to append
+	 * @param charset the charset used to encode the query string
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
+	 */
 	public static <T> T httpRequestWithGet(String baseURL,
 			Map<String, Object> paramsMap, String charset,
 			ResponseHandler<T> handler) throws IOException {
 		return httpRequestWithGet(baseURL, paramsMap, charset, null, handler);
 	}
 
+	/**
+	 * Execute a GET request against {@code baseURL} with the given parameters, charset and
+	 * custom request headers and process the response with {@code handler}.
+	 * @param baseURL the target URL
+	 * @param paramsMap the query parameters to append
+	 * @param charset the charset used to encode the query string
+	 * @param headers additional request headers, may be {@code null}
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
+	 */
 	public static <T> T httpRequestWithGet(String baseURL,
 			Map<String, Object> paramsMap, String charset,
 			Map<String, String> headers, ResponseHandler<T> handler)
@@ -75,6 +126,17 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 		}
 	}
 
+	/**
+	 * Execute a POST request against {@code baseURL} with the given parameters (UTF-8 charset,
+	 * {@code application/x-www-form-urlencoded} body) and process the response with
+	 * {@code handler}.
+	 * @param baseURL the target URL
+	 * @param paramsMap the form parameters to send
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
+	 */
 	public static <T> T httpRequestWithPost(String baseURL,
 			Map<String, Object> paramsMap, ResponseHandler<T> handler)
 			throws IOException {
@@ -82,7 +144,7 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 	}
 
 	/**
-	 * 进行post方式的请求；Content-Type 为 application/x-www-form-urlencoded
+	 * Execute a POST request with {@code Content-Type: application/x-www-form-urlencoded}.
 	 */
 	public static <T> T httpRequestWithPost(String baseURL,
 			Map<String, Object> paramsMap, String charset,
@@ -90,10 +152,36 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 		return httpRequestWithPost(baseURL, paramsMap, charset, ContentType.APPLICATION_FORM_URLENCODED + "; charset=" + charset, handler);
 	}
 
+	/**
+	 * Execute a POST request against {@code baseURL} with the given parameters, charset and
+	 * explicit {@code Content-Type} and process the response with {@code handler}.
+	 * @param baseURL the target URL
+	 * @param paramsMap the form parameters to send
+	 * @param charset the charset used to encode the body
+	 * @param contentType the {@code Content-Type} header value
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
+	 */
 	public static <T> T httpRequestWithPost(String baseURL,Map<String, Object> paramsMap, final String charset, String contentType, ResponseHandler<T> handler) throws IOException {
 		return httpRequestWithPost(baseURL, paramsMap, charset, contentType, null, handler);
 	}
 
+	/**
+	 * Execute a POST request against {@code baseURL} with the given parameters, charset,
+	 * {@code Content-Type} and custom request headers and process the response with
+	 * {@code handler}.
+	 * @param baseURL the target URL
+	 * @param paramsMap the form parameters to send
+	 * @param charset the charset used to encode the body
+	 * @param contentType the {@code Content-Type} header value
+	 * @param headers additional request headers, may be {@code null}
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
+	 */
 	public static <T> T httpRequestWithPost(String baseURL,
 			Map<String, Object> paramsMap, String charset, String contentType,
 			Map<String, String> headers, ResponseHandler<T> handler)
@@ -124,44 +212,45 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 	}
 
 	/**
-	 * 
-	 * @description ： 使用apache HttpClient 组件进行post方式的请求；Content-Type 为
-	 *              application/json
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date ：2015-6-24 上午09:13:35
-	 * @param baseURL
-	 * @param paramsMap
-	 * @return
-	 * @throws IOException
+	 * Execute a POST request against {@code baseURL} with a JSON body
+	 * ({@code Content-Type: application/json}).
+	 * @param baseURL the target URL
+	 * @param json the JSON body to send
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
 	 */
 	public static <T> T httpRequestWithPost(String baseURL, String json,ResponseHandler<T> handler) throws IOException {
 		return httpRequestWithPost(baseURL, json, ContentType.UTF_8, null, handler);
 	}
 
 	/**
-	 * 
-	 * @description ： 使用apache HttpClient 组件进行post方式的请求；Content-Type 为 application/json
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date ：2015-6-24 上午09:13:35
-	 * @param baseURL
-	 * @param paramsMap
-	 * @return
-	 * @throws IOException
+	 * Execute a POST request against {@code baseURL} with a JSON body
+	 * ({@code Content-Type: application/json}).
+	 * @param baseURL the target URL
+	 * @param json the JSON body to send
+	 * @param charset the charset used to encode the body
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
 	 */
 	public static <T> T httpRequestWithPost(String baseURL, String json,String charset, ResponseHandler<T> handler) throws IOException {
 		return httpRequestWithPost(baseURL, json, charset, null, handler);
 	}
 
 	/**
-	 * 
-	 * @description ： 使用apache HttpClient 组件进行post方式的请求；Content-Type 为
-	 *              application/json
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date ：2015-6-24 上午09:13:35
-	 * @param baseURL
-	 * @param paramsMap
-	 * @return
-	 * @throws IOException
+	 * Execute a POST request against {@code baseURL} with a JSON body
+	 * ({@code Content-Type: application/json}) and the given custom headers.
+	 * @param baseURL the target URL
+	 * @param json the JSON body to send
+	 * @param charset the charset used to encode the body
+	 * @param headers additional request headers, may be {@code null}
+	 * @param handler the response handler
+	 * @param <T> the result type produced by the handler
+	 * @return the handler result, or {@code null} if the request fails
+	 * @throws IOException if an I/O error occurs that is not handled internally
 	 */
 	public static <T> T httpRequestWithPost(String baseURL, String json,String charset, Map<String, String> headers,ResponseHandler<T> handler) throws IOException {
 		// 定义初始对象
@@ -198,8 +287,8 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 	}
 
 	/**
-	 * 
-	 * @description: 无条件的释放链接
+	 * Unconditionally release the connection held by an {@link HttpMethodBase}, swallowing any
+	 * exception. Intended for use from {@code finally} blocks.
 	 * <p>
 	 * Example Code:
 	 * <pre>
@@ -212,10 +301,8 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 	 * 	 HttpClientUtils.releaseQuietly(httpRequest);
 	 * }
 	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date 上午12:15:37 2015-9-4 
-	 * @param httpRequest：要释放链接的  HttpMethodBase子对象, 可能为空或者已经关闭.
-	 * @return  void
-	 * @throws
+	 * @param httpRequest the {@link HttpMethodBase} whose connection should be released, may be
+	 *                    {@code null} or already closed
 	 */
 	public static void releaseQuietly(HttpMethodBase httpRequest) {
 		// 关闭连接,释放资源
@@ -228,6 +315,11 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 		}
 	}
 
+	/**
+	 * Log the given exception at the appropriate level and rethrow it as an {@link IOException}.
+	 * @param e the exception to handle
+	 * @throws IOException always, wrapping {@code e}
+	 */
 	public static void handleException(Exception e) throws IOException {
 		if (e instanceof SocketTimeoutException) {
 			LOG.error("连接超时:" + e.getLocalizedMessage());

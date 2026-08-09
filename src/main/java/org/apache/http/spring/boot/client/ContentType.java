@@ -1,5 +1,14 @@
 package org.apache.http.spring.boot.client;
 
+/**
+ * Common content-type and character-encoding constants used when issuing HTTP requests and
+ * inspecting responses.
+ * <p>Holds the well-known MIME media types (JSON, XML, form-data, octet-stream, etc.) together
+ * with the character set names referenced by the helpers and response handlers in this
+ * starter.</p>
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public abstract class ContentType {
 	
 	// constants

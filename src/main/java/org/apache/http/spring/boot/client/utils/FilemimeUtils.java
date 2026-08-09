@@ -6,16 +6,19 @@ import java.util.Properties;
 import org.springframework.util.StringUtils;
 
 /**
- * 
- * @className	： FilemimeUtils
- * @description	： 文件后缀处理工具以及对于相应头获取
+ * Helper for resolving a file's MIME type from its extension.
+ * <p>
+ * Loads a {@code mimeTypes.properties} resource from the classpath (mapping extensions to MIME
+ * types) on class load and exposes lookup helpers that fall back to
+ * {@code application/octet-stream} when the extension is unknown.</p>
  * @author [@Loong Wan](https://github.com/loong10k)
- * @date		： 2017年12月3日 下午4:19:22
- * @version 	V1.0
+ * @since 1.0.0
  */
 public abstract class FilemimeUtils {
 
+	/** Name of the classpath resource holding the extension-to-MIME-type mapping. */
 	protected static final String MIMETYPES_PROPERTIES = "mimeTypes.properties";
+	/** MIME type returned when no mapping can be resolved. */
 	protected static final String DEFAULT_MIME = "application/octet-stream";
 	protected static Properties properties;
 
@@ -29,6 +32,12 @@ public abstract class FilemimeUtils {
 		}
 	}
 
+	/**
+	 * Resolve the MIME type for the given file, falling back to {@link #DEFAULT_MIME} when the
+	 * file is {@code null} or its extension is unknown.
+	 * @param file the file whose MIME type should be resolved
+	 * @return the resolved MIME type, or {@link #DEFAULT_MIME}
+	 */
 	public static String getFileMimeType(File file) {
 		if (file == null) {
 			return DEFAULT_MIME;
@@ -36,6 +45,12 @@ public abstract class FilemimeUtils {
 		return getFileMimeType(file.getName());
 	}
 
+	/**
+	 * Resolve the MIME type for the given file name, falling back to {@link #DEFAULT_MIME} when
+	 * the name has no extension or the extension is unknown.
+	 * @param fileName the file name whose MIME type should be resolved
+	 * @return the resolved MIME type, or {@link #DEFAULT_MIME}
+	 */
 	public static String getFileMimeType(String fileName) {
 		if ((StringUtils.isEmpty(fileName)) || (fileName.indexOf(".") == -1)) {
 			return DEFAULT_MIME;
@@ -44,6 +59,13 @@ public abstract class FilemimeUtils {
 		return getExtensionMimeType(fileName);
 	}
 
+	/**
+	 * Resolve the MIME type for the given extension (with or without a leading dot), returning
+	 * {@code null} when the extension is empty.
+	 * @param extension the file extension to resolve
+	 * @return the resolved MIME type, {@code null} for an empty extension, or
+	 *         {@link #DEFAULT_MIME} when unknown
+	 */
 	public static String getExtensionMimeType(String extension) {
 		String result = null;
 		if (StringUtils.isEmpty(extension)) {
@@ -57,6 +79,10 @@ public abstract class FilemimeUtils {
 		return result;
 	}
 
+	/**
+	 * Standalone entry point that prints the MIME type for a few common extensions.
+	 * @param args ignored
+	 */
 	public static void main(String[] args) {
 		System.out.println("FileMimeUtils.getExtensionMimeType(gif)="
 				+ getExtensionMimeType("gif"));

@@ -21,8 +21,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * TODO
+ * Helpers for quietly closing {@link InputStream}, {@link OutputStream} and other
+ * {@link Closeable} resources, swallowing any {@link IOException}. Intended for use from
+ * {@code finally} blocks.
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public class IOUtils {
 

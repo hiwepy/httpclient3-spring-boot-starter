@@ -17,14 +17,19 @@ package org.apache.http.spring.boot.client.property;
 
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 
+/**
+ * Extended {@link HttpConnectionParams} bound under {@code httpclient.connection}, providing
+ * per-connection tuning (socket timeouts, buffer sizes, linger, etc.) for the Commons
+ * HttpClient 3.x integration.
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HttpConnectionProperties extends HttpConnectionParams {
 
 	/**
-	 * 
-	 * @description	： 处理默认参数
-	 * @author [@Loong Wan](https://github.com/loong10k)
-	 * @date 		：2017年12月3日 下午9:13:14
-	 * @return
+	 * Return this instance typed as {@link HttpConnectionParams} so it can be supplied directly
+	 * to the underlying Commons HttpClient API.
+	 * @return the bound {@link HttpConnectionParams}
 	 */
 	public HttpConnectionParams getHttpConnectionParams() {
 		

@@ -22,26 +22,51 @@ import org.apache.http.spring.boot.utils.HttpClientUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Factory that produces Commons HttpClient 3.x {@link HttpClient} instances sharing an optional
+ * pooled {@link HttpConnectionManager}.
+ * <p>
+ * When {@code userManager} is {@code true} every client created by {@link #getCloseableHttpClient()}
+ * is wired to the shared connection manager; otherwise each client manages its own connections.</p>
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HttpClientFactory {
 
 	protected static Logger LOG = LoggerFactory.getLogger(HttpClientFactory.class);
 	
 	/**
-	 * 普通http请求的HttpClient连接池
+	 * Underlying connection manager used to serve the HTTP requests of every client produced by
+	 * this factory; may be {@code null} when no shared pool is required.
 	 */
 	private HttpConnectionManager httpConnectionManager = null;
 	private boolean userManager = true;
 
+	/**
+	 * Create a factory that uses the given connection manager and shares it with all produced
+	 * clients.
+	 * @param httpConnectionManager the shared connection manager to use
+	 */
 	public HttpClientFactory(HttpConnectionManager httpConnectionManager) {
 		this(httpConnectionManager,  true);
 	}
 
+	/**
+	 * Create a factory with explicit control over whether the connection manager is shared.
+	 * @param httpConnectionManager the connection manager to use when {@code userManager} is {@code true}
+	 * @param userManager whether produced clients should share the given connection manager
+	 */
 	public HttpClientFactory(HttpConnectionManager httpConnectionManager,
 			boolean userManager) {
 		this.httpConnectionManager = httpConnectionManager;
 		this.userManager = userManager;
 	}
 	
+	/**
+	 * Build a new {@link HttpClient}. When connection-manager sharing is enabled the shared
+	 * manager is bound to the client; on failure a plain {@code new HttpClient()} is returned.
+	 * @return a configured {@link HttpClient} instance
+	 */
 	public HttpClient getCloseableHttpClient() {
 		HttpClient httpclient = null;
 		try {

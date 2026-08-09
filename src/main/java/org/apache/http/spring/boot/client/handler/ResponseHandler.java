@@ -6,23 +6,26 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 
 /**
- * Handler that encapsulates the process of generating a response object
- * from a {@link HttpResponse}.
+ * Strategy interface for processing an HttpClient 3.x response, encapsulating both client-side
+ * pre-processing and the conversion of the response into a typed result.
+ * @param <T> the type produced by this handler
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public interface ResponseHandler<T> {
 
 	/**
-	 * 对HttpClient进行预处理
-	 * @param httpclient
+	 * Pre-process the {@link HttpClient} before the request is executed (for example, to set
+	 * credentials or default parameters).
+	 * @param httpclient the client about to execute the request
 	 */
 	void handleClient(HttpClient httpclient);
 	
     /**
-     * Processes an {@link HttpResponse} and returns some value
-     * corresponding to that response.
+     * Process the executed HTTP method and produce a value from its response.
      *
-     * @param response The response to process
-     * @return A value determined by the response
+     * @param httpMethod the executed {@link HttpMethodBase}
+     * @return a value determined by the response
      *
      * @throws IOException in case of a problem or the connection was aborted
      */
