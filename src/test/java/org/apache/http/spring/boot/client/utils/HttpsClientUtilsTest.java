@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.apache.http.spring.boot.utils;
+package org.apache.http.spring.boot.client.utils;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,18 +21,17 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Unit tests for {{ @link HttpClientUtils }}.
+ * Unit tests for {@link HttpsClientUtils}.
  *
  * @author [@Loong Wan](https://github.com/loong10k)
  * @since 1.0.0
  */
-@DisplayName("HttpClientUtils Tests")
-class HttpClientUtilsTest {
+@DisplayName("HttpsClientUtils Tests")
+class HttpsClientUtilsTest {
 
     @Test
-    @DisplayName("Instance can be created via constructor")
-    void testInstantiation() {
-        HttpClientUtils instance = new HttpClientUtils();
-        assertThat(instance).isNotNull();
+    @DisplayName("Class is abstract")
+    void testIsAbstract() {
+        assertThat(java.lang.reflect.Modifier.isAbstract(HttpsClientUtils.class.getModifiers())).isTrue();
     }
 }

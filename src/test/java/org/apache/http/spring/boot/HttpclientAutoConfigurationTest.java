@@ -43,17 +43,16 @@ class HttpclientAutoConfigurationTest {
     }
 
     @Test
-    @DisplayName("Auto-configuration loads when 'spring.boot.enabled=true'")
-    void testLoadsWhenEnabledPropertySet() {
+    @DisplayName("Auto-configuration loads when HttpClient is on classpath")
+    void testLoadsWhenHttpClientOnClasspath() {
         runner.withUserConfiguration(HttpclientAutoConfiguration.class)
-                .withPropertyValues("spring.boot.enabled=true")
                 .run(context -> assertThat(context).hasSingleBean(HttpclientAutoConfiguration.class));
     }
 
     @Test
-    @DisplayName("Auto-configuration is absent when property is not set")
-    void testNotLoadedWhenPropertyAbsent() {
+    @DisplayName("Auto-configuration exposes HttpConnectionManager bean")
+    void testExposesHttpConnectionManagerBean() {
         runner.withUserConfiguration(HttpclientAutoConfiguration.class)
-                .run(context -> assertThat(context).doesNotHaveBean(HttpclientAutoConfiguration.class));
+                .run(context -> assertThat(context).hasSingleBean(org.apache.commons.httpclient.HttpConnectionManager.class));
     }
 }

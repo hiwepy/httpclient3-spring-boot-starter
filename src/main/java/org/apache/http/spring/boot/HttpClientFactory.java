@@ -18,7 +18,7 @@ package org.apache.http.spring.boot;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpConnectionManager;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
-import org.apache.http.spring.boot.utils.HttpClientUtils;
+import org.apache.http.spring.boot.client.utils.HttpClientUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

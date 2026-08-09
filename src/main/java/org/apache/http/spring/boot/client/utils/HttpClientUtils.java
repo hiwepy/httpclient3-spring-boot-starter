@@ -1,4 +1,4 @@
-package org.apache.http.spring.boot.utils;
+package org.apache.http.spring.boot.client.utils;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -99,7 +99,7 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 			Map<String, String> headers, ResponseHandler<T> handler)
 			throws IOException {
 		// createsdefault的httpClient实例.
-		HttpClient httpclient = HttpClientUtils.getCloseableHttpClient(httpConnectionManager);
+		HttpClient httpclient = new HttpClient(new SimpleHttpConnectionManager());
 		// GetMethod对象
 		GetMethod httpMethod = null;
 		try {
@@ -189,7 +189,7 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 		// 定义初始对象
 		PostMethod httpMethod = null;
 		// createsdefault的httpClient实例.
-		HttpClient httpclient = HttpClientUtils.getCloseableHttpClient(httpConnectionManager);
+		HttpClient httpclient = new HttpClient(new SimpleHttpConnectionManager());
 		try {
 			// 对HttpClient进行预处理
 			handler.handleClient(httpclient);
@@ -256,7 +256,7 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 		// 定义初始对象
 		PostMethod httpMethod = null;
 		// createsdefault的httpClient实例.
-		HttpClient httpclient = HttpClientUtils.getCloseableHttpClient(httpConnectionManager);
+		HttpClient httpclient = new HttpClient(new SimpleHttpConnectionManager());
 		try {
 			//对HttpClient进行预处理
 			handler.handleClient(httpclient);
