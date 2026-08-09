@@ -98,25 +98,25 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 			Map<String, Object> paramsMap, String charset,
 			Map<String, String> headers, ResponseHandler<T> handler)
 			throws IOException {
-		// 创建默认的httpClient实例.
+		// createsdefault的httpClient实例.
 		HttpClient httpclient = HttpClientUtils.getCloseableHttpClient(httpConnectionManager);
 		// GetMethod对象
 		GetMethod httpMethod = null;
 		try {
 			//对HttpClient进行预处理
 			handler.handleClient(httpclient);
-			// 创建httpget
+			// createshttpget
 			httpMethod = getHttpGet(baseURL, charset, headers);
 			 //初始参数集合对象
 	    	List<NameValuePair> nameValueList    = HttpURIUtils.buildNameValuePairs(baseURL , paramsMap);
 	        NameValuePair[] nameValuePairs = nameValueList.toArray(new NameValuePair[nameValueList.size()]);
-	        // 设置参数
+	        // sets参数
 	        httpMethod.setQueryString(nameValuePairs);
-			// 执行请求
+			// 执行request
 			int statuscode = httpclient.executeMethod(httpMethod);
-			// 最终执行的方法，如果没有重定向,则与原始请求对象是同一个对象
+			// 最终执行的方法，如果没有重定向,则与原始request对象是同一个对象
 			GetMethod lastMethod = HttpRedirectUtils.stripRedirect(httpclient, httpMethod, statuscode, charset, headers, nameValuePairs);
-			// 处理最终的响应结果
+			// 处理最终的response结果
 			return handler.handleResponse(lastMethod);
 		} catch (Exception e) {
 			handleException(e);
@@ -188,20 +188,20 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 			throws IOException {
 		// 定义初始对象
 		PostMethod httpMethod = null;
-		// 创建默认的httpClient实例.
+		// createsdefault的httpClient实例.
 		HttpClient httpclient = HttpClientUtils.getCloseableHttpClient(httpConnectionManager);
 		try {
 			// 对HttpClient进行预处理
 			handler.handleClient(httpclient);
-			// 得到请求方法
+			// 得到request方法
 			httpMethod = getHttpPost(baseURL, charset, headers);
-			// 设置参数
+			// sets参数
 			setHttpMethod(httpMethod, baseURL, paramsMap, charset, contentType, headers);
-			// 执行请求
+			// 执行request
 			int statuscode = httpclient.executeMethod(httpMethod);
-			// 最终执行的方法，如果没有重定向,则与原始请求对象是同一个对象
+			// 最终执行的方法，如果没有重定向,则与原始request对象是同一个对象
 			PostMethod lastMethod = HttpRedirectUtils.stripRedirect(baseURL, httpclient, httpMethod, statuscode, charset, contentType,  headers, paramsMap);
-			// 处理最终的响应结果
+			// 处理最终的response结果
 			return handler.handleResponse(lastMethod);
 		} catch (Exception e) {
 			handleException(e);
@@ -255,27 +255,27 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 	public static <T> T httpRequestWithPost(String baseURL, String json,String charset, Map<String, String> headers,ResponseHandler<T> handler) throws IOException {
 		// 定义初始对象
 		PostMethod httpMethod = null;
-		// 创建默认的httpClient实例.
+		// createsdefault的httpClient实例.
 		HttpClient httpclient = HttpClientUtils.getCloseableHttpClient(httpConnectionManager);
 		try {
 			//对HttpClient进行预处理
 			handler.handleClient(httpclient);
 			// 如果服务器需要通过HTTPS连接，那只需要将下面URL中的http换成https
 			httpMethod = HttpRequestUtils.getHttpRequest(new PostMethod(baseURL), headers);
-			// 将JSON进行UTF-8编码,以便传输中文
+			// 将JSON进行UTF-8encoding,以便传输中文
 			String encoderJson = URLEncoder.encode(json != null ? json : "{}", charset);
 			// 构建字符串参数对象
 			RequestEntity requestEntity = new StringRequestEntity(encoderJson,ContentType.TEXT_JSON, charset );
-			// 设置请求头信息
+			// setsrequest头info
 			httpMethod.setRequestHeader(HttpHeaders.CONTENT_ENCODING, charset);
 			httpMethod.setRequestHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON);
-			// 设置参数
+			// sets参数
 			httpMethod.setRequestEntity(requestEntity);
-			// 执行请求
+			// 执行request
 			int statuscode = httpclient.executeMethod(httpMethod);
-			// 最终执行的方法，如果没有重定向,则与原始请求对象是同一个对象
+			// 最终执行的方法，如果没有重定向,则与原始request对象是同一个对象
 			PostMethod lastMethod = HttpRedirectUtils.stripRedirect(httpclient, httpMethod, statuscode, charset, headers, requestEntity);
-			// 处理最终的响应结果
+			// 处理最终的response结果
 			return handler.handleResponse(lastMethod);
 		} catch (Exception e) {
 			handleException(e);
@@ -322,13 +322,13 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 	 */
 	public static void handleException(Exception e) throws IOException {
 		if (e instanceof SocketTimeoutException) {
-			LOG.error("连接超时:" + e.getLocalizedMessage());
+			LOG.error("连接timeout:" + e.getLocalizedMessage());
 		} else if (e instanceof HttpException) {
-			LOG.error("读取外部服务器数据失败:" + e.getLocalizedMessage());
+			LOG.error("读取外部服务器数据failure:" + e.getLocalizedMessage());
 		} else if (e instanceof UnknownHostException) {
-			LOG.error("请求的主机地址无效:" + e.getLocalizedMessage());
+			LOG.error("request的hostaddress无效:" + e.getLocalizedMessage());
 		} else if (e instanceof IOException) {
-			LOG.error("向外部接口发送数据失败:" + e.getLocalizedMessage());
+			LOG.error("向外部接口发送数据failure:" + e.getLocalizedMessage());
 		} 
 		throw new IOException(e);
 	}

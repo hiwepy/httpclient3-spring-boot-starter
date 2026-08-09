@@ -36,7 +36,7 @@ public class StreamResponseHandler implements ResponseHandler<ByteArrayInputStre
 		int status = statusLine.getStatusCode();
 		if (status >= HttpStatus.SC_OK && status < HttpStatus.SC_MULTIPLE_CHOICES) {
 			try {
-				// 响应内容
+				// response内容
 				return new ByteArrayInputStream(httpMethod.getResponseBody());
 			} finally {
 				

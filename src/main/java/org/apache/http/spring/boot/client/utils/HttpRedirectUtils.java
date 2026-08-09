@@ -38,9 +38,9 @@ public abstract class HttpRedirectUtils {
 		PostMethod redirectMethod = HttpRequestUtils.getHttpRedirect(httpMethod, statuscode , charset, headers);
 		// 方法被重定向
 		if(redirectMethod != null){
-			// 设置参数
+			// sets参数
 			redirectMethod.setRequestEntity(requestEntity);
-			// 执行请求
+			// 执行request
 			int newStatuscode = httpclient.executeMethod(redirectMethod);
 			// 如果是重定向则需进一步处理
 			PostMethod newRedirectMethod = HttpRequestUtils.getHttpRedirect(redirectMethod, newStatuscode , charset, headers);
@@ -73,9 +73,9 @@ public abstract class HttpRedirectUtils {
 		GetMethod redirectMethod = HttpRequestUtils.getHttpRedirect(httpMethod, statuscode , charset, headers);
 		// 方法被重定向
 		if(redirectMethod != null){
-			// 设置参数
+			// sets参数
 			httpMethod.setQueryString(nameValuePairs);
-			// 执行请求
+			// 执行request
 			int newStatuscode = httpclient.executeMethod(redirectMethod);
 			// 如果是重定向则需进一步处理
 			GetMethod newRedirectMethod = HttpRequestUtils.getHttpRedirect(redirectMethod, newStatuscode , charset, headers);
@@ -109,9 +109,9 @@ public abstract class HttpRedirectUtils {
 		PostMethod redirectMethod = HttpRequestUtils.getHttpRedirect(httpMethod, statuscode , charset, headers);
 		// 方法被重定向
 		if(redirectMethod != null){
-			// 设置参数
+			// sets参数
 			HttpRequestUtils.setHttpMethod(httpMethod, baseURL, paramsMap, charset, contentType, headers);
-			// 执行请求
+			// 执行request
 			int newStatuscode = httpclient.executeMethod(redirectMethod);
 			// 如果是重定向则需进一步处理
 			PostMethod newRedirectMethod = HttpRequestUtils.getHttpRedirect(redirectMethod, newStatuscode , charset, headers);

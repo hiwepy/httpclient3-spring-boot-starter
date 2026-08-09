@@ -41,16 +41,16 @@ public class RedirectResponseHandler implements ResponseHandler<String> {
 	@Override
 	public String handleResponse(HttpMethodBase httpMethod) throws IOException {
 		StatusLine statusLine = httpMethod.getStatusLine();
-		// 检查是否重定向
+		// 检查whether重定向
 		int statuscode = statusLine.getStatusCode();
 		if ((statuscode == HttpStatus.SC_MOVED_TEMPORARILY)
 				|| (statuscode == HttpStatus.SC_MOVED_PERMANENTLY)
 				|| (statuscode == HttpStatus.SC_SEE_OTHER)
 				|| (statuscode == HttpStatus.SC_TEMPORARY_REDIRECT)) {
-			// 读取新的 URL 地址
+			// 读取新的 URL address
 			Header header = httpMethod.getResponseHeader("location");
 			if (header != null) {
-				// 从头中取出转向的地址
+				// 从头中取出转向的address
 				String redirectURI = header.getValue();
 				if ((redirectURI == null) || (redirectURI.equals(""))) {
 					redirectURI = "/";

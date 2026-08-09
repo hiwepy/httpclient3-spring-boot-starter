@@ -162,23 +162,23 @@ public class HttpConnectionManagerProperties extends HttpConnectionManagerParams
 	 */
 	public HttpConnectionManagerProperties getInitedParams() {
 		
-		// 设置httpclient是否使用NoDelay策略;默认 true
+		// setshttpclientwhether使用NoDelay策略;default true
 		this.setTcpNoDelay(getBooleanParameter(TCP_NODELAY, true));
-		// 通过网络与服务器建立连接的超时时间。Httpclient包中通过一个异步线程去创建与服务器的socket连接，这就是该socket连接的超时时间(单位毫秒)，默认30000
+		// 通过网络与服务器建立连接的timeout时间。Httpclient包中通过一个asyncthread去creates与服务器的socket连接，这就是该socket连接的timeout时间(单位毫秒)，default30000
 		this.setConnectionTimeout(getIntParameter(CONNECTION_TIMEOUT, 30000));
-		// 连接读取数据超时时间(单位毫秒)，默认60000 
+		// 连接读取数据timeout时间(单位毫秒)，default60000 
 		this.setSoTimeout(getIntParameter(SO_TIMEOUT, 60000));
-		// 每个HOST的最大连接数量 
+		// 每个HOST的maximum连接count 
 		this.setDefaultMaxConnectionsPerHost(getIntParameter(MAX_HOST_CONNECTIONS, 20));
-		// 连接池的最大连接数
+		// 连接池的maximum连接数
 		this.setMaxTotalConnections(getIntParameter(MAX_TOTAL_CONNECTIONS, 60));
-		//socket发送数据的缓冲大小 ;默认 ：1M
+		//socket发送数据的缓冲size ;default ：1M
 		this.setSendBufferSize( getIntParameter(SO_SNDBUF, 1024 * 1024));
-		//socket接收数据的缓冲大小 ;默认 ：1M
+		//socket接收数据的缓冲size ;default ：1M
 		this.setReceiveBufferSize(getIntParameter(SO_RCVBUF, 1024 * 1024));
-		//检查连接是否有效的心跳周期 
+		//检查连接whether有效的心跳周期 
 		this.setTimeoutInterval(getIntParameter(TIMEOUT_INTERVAL, 1000 * 5));
-		// 使用系统提供的默认的恢复策略
+		// 使用系统提供的default的resume策略
 		this.setParameter(HttpMethodParams.RETRY_HANDLER,new DefaultHttpMethodRetryHandler());
 		
 		return this;

@@ -90,7 +90,7 @@ public abstract class HttpRequestUtils {
 	 */
 	public static List<Header> getDefaultHeaders() {
 		List<Header> headers = new ArrayList<Header>();
-		//设置默认请求头信息
+		//setsdefaultrequest头info
 		headers.add(new Header(HttpHeaders.CONNECTION, "keep-alive"));
 		headers.add(new Header(HttpHeaders.ACCEPT, "*/*"));
 		headers.add(new Header(HttpHeaders.CACHE_CONTROL, "max-age=0"));
@@ -109,7 +109,7 @@ public abstract class HttpRequestUtils {
 	public static List<Header> getHeaders(String ip) {
 		List<Header> headers = getDefaultHeaders();
 		headers.add(new Header(HttpHeaders.X_FORWARDED_FOR, ip));
-		//模拟Ajax请求
+		//模拟Ajaxrequest
 		//headers.add(new Header(HttpHeaders.X_REQUESTED_WITH, "XMLHttpRequest"));
 		//headers.add(new Header("Host", ""));
 		return headers;
@@ -124,42 +124,42 @@ public abstract class HttpRequestUtils {
 	 * @return the configured method
 	 */
 	public static <T extends HttpMethodBase> T getHttpRequest(T httpRequest,Map<String, String> headers) {
-		//设置默认请求头信息
-		/*Accept表示浏览器支持的 MIME 类型；
-	　　	MIME的英文全称是 Multipurpose Internet Mail Extensions（多功能 Internet 邮件扩充服务），它是一种多用途网际邮件扩充协议，在1992年最早应用于电子邮件系统，但后来也应用到浏览器。
-	　　	text/html,application/xhtml+xml,application/xml 都是 MIME 类型，也可以称为媒体类型和内容类型，斜杠前面的是 type（类型），斜杠后面的是 subtype（子类型）；type 指定大的范围，subtype 是 type 中范围更明确的类型，即大类中的小类。
-	　　	Text：用于标准化地表示的文本信息，文本消息可以是多种字符集和或者多种格式的；
+		//setsdefaultrequest头info
+		/*Accept表示浏览器支持的 MIME type；
+	　　	MIME的英文全称是 Multipurpose Internet Mail Extensions（多功能 Internet 邮件扩充服务），它是一种多用途网际邮件扩充protocol，在1992年最早应用于电子邮件系统，但后来也应用到浏览器。
+	　　	text/html,application/xhtml+xml,application/xml 都是 MIME type，也可以称为媒体type和内容type，斜杠前面的是 type（type），斜杠后面的是 subtype（子type）；type 指定大的范围，subtype 是 type 中范围更明确的type，即大类中的小类。
+	　　	Text：用于标准化地表示的文本info，文本message可以是多种字符集和或者多种格式的；
 	　　	text/html表示 html 文档；
 	　　	Application：用于传输应用程序数据或者二进制数据；
 	　　	application/xhtml+xml表示 xhtml 文档；
 	　　	application/xml表示 xml 文档*/
 		httpRequest.addRequestHeader(HttpHeaders.ACCEPT, "*/*");
 		/*
-		Accept-Encoding表示浏览器有能力解码的编码类型；
+		Accept-Encoding表示浏览器有能力解码的encodingtype；
 		gzip是 GNU zip 的缩写，它是一个 GNU 自由软件的文件压缩程序，也经常用来表示 gzip 这种文件格式。
-		deflate是同时使用了 LZ77 算法与哈夫曼编码（Huffman Coding）的一个无损数据压缩算法。
+		deflate是同时使用了 LZ77 算法与哈夫曼encoding（Huffman Coding）的一个无损数据压缩算法。
 		*/
 		//httpRequest.addRequestHeader(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate");
-		/*Accept-Language表示浏览器所支持的语言类型；
+		/*Accept-Language表示浏览器所支持的语言type；
 		　　zh-cn表示简体中文；zh 表示中文；
-		　　q是权重系数，范围 0 =< q <= 1，q 值越大，请求越倾向于获得其“;”之前的类型表示的内容，若没有指定 q 值，则默认为1，若被赋值为0，则用于提醒服务器哪些是浏览器不接受的内容类型
+		　　q是权重系数，范围 0 =< q <= 1，q 值越大，request越倾向于获得其“;”之前的type表示的内容，若没有指定 q 值，则default为1，若被赋值为0，则用于提醒服务器哪些是浏览器不接受的内容type
 		*/
 		httpRequest.addRequestHeader(HttpHeaders.ACCEPT_LANGUAGE,"zh-cn,zh;q=0.5");
-		/*Accept-Charset告诉 Web 服务器，浏览器可以接受哪些字符编码；
-		　　GB2312是中国国家标准简体中文字符集，全称《信息交换用汉字编码字符集·基本集》，又称GB0，由中国国家标准总局发布，1981年5月1日实施。GB2312 编码通行于中国大陆；新加坡等地也采用此编码。
-		　　utf-8是 Unicode 的一种变长字符编码又称万国码，由 Ken Thompson 于1992年创建，现在已经标准化为 RFC 3629。
-		　　*表示任意字符编码，虽然 q 都是等于 0.7，但明确指定的 GB2312,utf-8 比 * 具有更高的优先级。*/
+		/*Accept-Charset告诉 Web 服务器，浏览器可以接受哪些字符encoding；
+		　　GB2312是中国国家标准简体中文字符集，全称《info交换用汉字encoding字符集·基本集》，又称GB0，由中国国家标准总局发布，1981年5月1日实施。GB2312 encoding通行于中国大陆；新加坡等地也采用此encoding。
+		　　utf-8是 Unicode 的一种变长字符encoding又称万国码，由 Ken Thompson 于1992年creates，现在已经标准化为 RFC 3629。
+		　　*表示任意字符encoding，虽然 q 都是等于 0.7，但明确指定的 GB2312,utf-8 比 * 具有更高的优先级。*/
 		httpRequest.addRequestHeader(HttpHeaders.ACCEPT_CHARSET,"GB2312,utf-8;q=0.7,*;q=0.7");
-		/*Connection表示客户端与服务连接类型；Keep-Alive表示持久连接；*/
+		/*Connection表示客户端与服务连接type；Keep-Alive表示持久连接；*/
 		httpRequest.addRequestHeader(HttpHeaders.CONNECTION, "keep-alive");
 		httpRequest.addRequestHeader(HttpHeaders.CACHE_CONTROL, "max-age=0");
 		//httpRequest.addHeader(HttpHeaders.HOST, "mp.weixin.qq.com");
 		//httpRequest.addHeader(HttpHeaders.X_REQUESTED_WITH, "XMLHttpRequest");
-		/*User-Agent（用户代理），简称 UA，它是一个特殊字符串头，使得服务器能够识别客户端使用的操作系统及版本、CPU 类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等。
+		/*User-Agent（user代理），简称 UA，它是一个特殊字符串头，使得服务器能够识别客户端使用的操作系统及版本、CPU type、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等。
 	　　	Mozilla/5.0：Mozilla 是浏览器名，版本是 5.0；
 	　　	compatible（兼容的）表示平台是兼容模式；*/
 		httpRequest.addRequestHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; SV1; .NET CLR 1.1.4322)");
-		//设置自定义请求头信息
+		//sets自定义request头info
         if (headers != null) {  
             Set<String> keys = headers.keySet();  
             for (Iterator<String> i = keys.iterator(); i.hasNext();) {  
@@ -212,15 +212,15 @@ public abstract class HttpRequestUtils {
 	@SuppressWarnings("unchecked")
 	public static <T extends HttpMethodBase> T getHttpRedirect(T httpMethod,int statuscode, String charset,
 			Map<String, String> headers) throws HttpResponseException {
-		// 检查是否重定向
+		// 检查whether重定向
 		if ((statuscode == HttpStatus.SC_MOVED_TEMPORARILY)
 				|| (statuscode == HttpStatus.SC_MOVED_PERMANENTLY)
 				|| (statuscode == HttpStatus.SC_SEE_OTHER)
 				|| (statuscode == HttpStatus.SC_TEMPORARY_REDIRECT)) {
-			// 从头中取出转向的地址
+			// 从头中取出转向的address
 			Header header = httpMethod.getResponseHeader("location");
 			if (header != null) {
-				// 从头中取出转向的地址
+				// 从头中取出转向的address
 				String redirectURI = header.getValue();
 				if ((redirectURI == null) || (redirectURI.equals(""))) {
 					redirectURI = "/";
@@ -253,7 +253,7 @@ public abstract class HttpRequestUtils {
     	//有实体对象参数，表示可能有文件上传
     	if(HttpRequestUtils.isMultipart(paramsMap)){
     		List<Part> parts = new ArrayList<Part>();
-            //初始路径中的参数集合对象
+            //初始path中的参数集合对象
             List<NameValuePair> nameValuePostBodies = HttpURIUtils.buildNameValuePairs(baseURL);
             for (NameValuePair nameValuePair : nameValuePostBodies) {
             	parts.add(new StringPart(nameValuePair.getName(), nameValuePair.getValue(), charset));
@@ -268,11 +268,11 @@ public abstract class HttpRequestUtils {
     	            if (value instanceof File) {
     	            	//文件对象
     	            	File file = (File) value;
-    	            	//对应服务端类的同名属性<File类型>
+    	            	//对应服务端类的同名properties<Filetype>
     	                parts.add(new FilePart(name, file));
     	                //用来封装上传文件的文件名
     	                parts.add(new StringPart(name + "FileName", file.getName(), charset));
-    	                //用来封装上传文件的类型
+    	                //用来封装上传文件的type
     	                parts.add(new StringPart(name + "ContentType", FilemimeUtils.getFileMimeType(file), charset));
     	            } else if (value instanceof InputStream) {
     	            	// 把输入流转换成流对象InputStreamPartSource
@@ -305,7 +305,7 @@ public abstract class HttpRequestUtils {
 	public static void setHttpMethod(PostMethod httpMethod,String baseURL,
 			Map<String, Object> paramsMap, String charset, String contentType,
 			Map<String, String> headers) throws IOException {
-		// 判断请求头信息
+		// 判断request头info
 		if (contentType != null) {
 			httpMethod.setRequestHeader(HttpHeaders.CONTENT_TYPE, contentType);
 		} else {
@@ -315,7 +315,7 @@ public abstract class HttpRequestUtils {
 		if (HttpRequestUtils.isMultipart(paramsMap)) {
 			// 有文件上传
 			httpMethod.setRequestHeader(HttpHeaders.CONTENT_TYPE,ContentType.MULTIPART_FORM_DATA + ";charset=" + charset);
-			// 得到请求实体对象
+			// 得到request实体对象
 			RequestEntity requestEntity = getHttpEntity(httpMethod, baseURL,paramsMap, charset);
 			httpMethod.setRequestEntity(requestEntity);
 		}else {

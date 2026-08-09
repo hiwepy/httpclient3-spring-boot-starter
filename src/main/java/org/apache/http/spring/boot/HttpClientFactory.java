@@ -75,9 +75,9 @@ public class HttpClientFactory {
 				httpclient.setHttpConnectionManager(httpConnectionManager);
 			}
 			
-			// 设置读取超时时间(单位毫秒)
+			// sets读取timeout时间(单位毫秒)
 			// httpClient.getParams().setParameter("http.socket.timeout",socket_timeout);
-			// 设置连接超时时间(单位毫秒)
+			// sets连接timeout时间(单位毫秒)
 			// httpClient.getParams().setParameter("http.connection.timeout",connection_timeout);
 			// httpClient.getParams().setParameter("http.connection-manager.timeout",100000000L);
 		} catch (Exception e) {
