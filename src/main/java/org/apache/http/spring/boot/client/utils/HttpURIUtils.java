@@ -36,7 +36,7 @@ public abstract class HttpURIUtils {
 	/**
 	 * 
 	 * @description	：构建普通参数集合
-	 * @author [@Loong Wan](https://github.com/loong10k)
+	 * @author <a href="https://github.com/loong10k">Loong Wan</a>
 	 * @date 		：Jun 30, 2015 6:57:06 PM
 	 * @param baseURL
 	 * @param paramsMap
