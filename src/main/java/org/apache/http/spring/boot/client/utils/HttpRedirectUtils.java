@@ -14,7 +14,7 @@ import org.apache.commons.httpclient.methods.RequestEntity;
  * Helpers for transparently following HTTP redirect responses during Commons HttpClient 3.x
  * request execution, preserving the request parameters, body or {@code RequestEntity} across
  * the redirect chain.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public abstract class HttpRedirectUtils {

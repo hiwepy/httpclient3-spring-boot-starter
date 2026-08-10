@@ -14,7 +14,7 @@ import org.apache.http.spring.boot.client.exception.HttpResponseException;
  * {@link ResponseHandler} implementation that exposes the response body as a
  * {@link ByteArrayInputStream}.
  * <p>A {@link HttpResponseException} is thrown when the status code is outside the 2xx range.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class StreamResponseHandler implements ResponseHandler<ByteArrayInputStream> {

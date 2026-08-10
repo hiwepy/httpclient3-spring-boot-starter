@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Helpers for inspecting Commons HttpClient 3.x responses.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public abstract class HttpResponeUtils{

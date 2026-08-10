@@ -20,7 +20,7 @@ import org.apache.http.spring.boot.client.exception.HttpResponseException;
  * {@link Document}.
  * <p>A {@link HttpResponseException} is thrown when the status code is outside the 2xx range
  * or the XML is malformed.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class XMLResponseHandler implements ResponseHandler<Document> {

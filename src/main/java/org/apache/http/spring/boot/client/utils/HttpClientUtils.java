@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * Each {@code httpRequestWith*} method creates an {@link HttpClient}, applies the supplied
  * {@link ResponseHandler} for client pre-processing, follows up to one redirect, processes the
  * final response through the handler and unconditionally releases the connection.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public abstract class HttpClientUtils extends HttpRequestUtils {
@@ -300,7 +300,7 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 	 * } finally {
 	 * 	 HttpClientUtils.releaseQuietly(httpRequest);
 	 * }
-	 * @author [@Loong Wan](https://github.com/loong10k)
+	 * @author <a href="https://github.com/loong10k">Loong Wan</a>
 	 * @param httpRequest the {@link HttpMethodBase} whose connection should be released, may be
 	 *                    {@code null} or already closed
 	 */

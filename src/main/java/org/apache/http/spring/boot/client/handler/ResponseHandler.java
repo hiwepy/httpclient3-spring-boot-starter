@@ -9,7 +9,7 @@ import org.apache.commons.httpclient.HttpMethodBase;
  * Strategy interface for processing an HttpClient 3.x response, encapsulating both client-side
  * pre-processing and the conversion of the response into a typed result.
  * @param <T> the type produced by this handler
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public interface ResponseHandler<T> {

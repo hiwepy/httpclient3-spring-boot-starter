@@ -16,7 +16,7 @@ import com.thoughtworks.xstream.XStream;
  * {@link ResponseHandler} implementation that deserialises an XML response body into a Java
  * object graph using XStream.
  * <p>A {@link HttpResponseException} is thrown when the status code is outside the 2xx range.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class ObjectResponseHandler implements ResponseHandler<Object> {

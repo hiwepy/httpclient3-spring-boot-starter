@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * <p>
  * When {@code userManager} is {@code true} every client created by {@link #getCloseableHttpClient()}
  * is wired to the shared connection manager; otherwise each client manages its own connections.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class HttpClientFactory {

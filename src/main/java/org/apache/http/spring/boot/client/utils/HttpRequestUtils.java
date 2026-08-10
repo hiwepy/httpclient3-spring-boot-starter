@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  * Helpers for preparing Commons HttpClient 3.x requests: building URLs, encoding parameters,
  * assembling default/custom headers, constructing {@link RequestEntity} bodies (including
  * multipart uploads) and detecting redirect or gzip responses.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public abstract class HttpRequestUtils {

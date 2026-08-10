@@ -15,7 +15,7 @@ import org.apache.commons.httpclient.util.URIUtil;
  * Helpers for working with URLs and query strings in Commons HttpClient 3.x requests: merging
  * in-URL query parameters with an additional parameter map, URL-encoding values and building
  * {@link NameValuePair} lists.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public abstract class HttpURIUtils {

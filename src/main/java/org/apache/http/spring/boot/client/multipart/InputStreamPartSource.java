@@ -9,7 +9,7 @@ import org.apache.commons.httpclient.methods.multipart.PartSource;
  * Implementation of Commons HttpClient 3.x {@link PartSource} backed by an
  * {@link InputStream}, allowing an in-memory or streamed payload to be uploaded as a
  * {@code multipart/form-data} part without requiring an underlying file.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class InputStreamPartSource implements PartSource {

@@ -21,7 +21,7 @@ import org.apache.commons.httpclient.params.HttpConnectionParams;
  * Extended {@link HttpConnectionParams} bound under {@code httpclient.connection}, providing
  * per-connection tuning (socket timeouts, buffer sizes, linger, etc.) for the Commons
  * HttpClient 3.x integration.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class HttpConnectionProperties extends HttpConnectionParams {

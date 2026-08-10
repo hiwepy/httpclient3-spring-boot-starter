@@ -15,7 +15,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
  * Default request headers may be specified as key/value entries under {@code httpclient.headers};
  * per-host parameters may be specified as {@code <host>-<paramKey>=<paramValue>} entries under
  * {@code httpclient.hosts}.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @ConfigurationProperties(prefix = HttpclientProperties.PREFIX)

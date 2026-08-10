@@ -24,7 +24,7 @@ import com.alibaba.fastjson.JSONObject;
  * {@link JSONObject}. XML responses ({@code application/xml}) are parsed into a JSON object
  * tree, JSON responses ({@code application/json}) are parsed directly, and any other content
  * type produces an {@link HttpResponseException}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")

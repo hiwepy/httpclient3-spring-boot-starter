@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  * HTTPS-aware companion to {@link HttpClientUtils} that, on class load, registers a Commons
  * HttpClient 3.x {@link Protocol} for {@code https://} using the default
  * {@link SSLProtocolSocketFactory} on port {@code 443}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @SuppressWarnings("deprecation")

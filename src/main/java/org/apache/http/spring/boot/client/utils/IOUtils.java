@@ -24,7 +24,7 @@ import java.io.OutputStream;
  * Helpers for quietly closing {@link InputStream}, {@link OutputStream} and other
  * {@link Closeable} resources, swallowing any {@link IOException}. Intended for use from
  * {@code finally} blocks.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class IOUtils {

@@ -6,7 +6,7 @@ package org.apache.http.spring.boot.client;
  * <p>Holds the well-known MIME media types (JSON, XML, form-data, octet-stream, etc.) together
  * with the character set names referenced by the helpers and response handlers in this
  * starter.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public abstract class ContentType {

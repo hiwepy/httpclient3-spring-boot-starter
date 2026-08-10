@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
  * Loads a {@code mimeTypes.properties} resource from the classpath (mapping extensions to MIME
  * types) on class load and exposes lookup helpers that fall back to
  * {@code application/octet-stream} when the extension is unknown.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public abstract class FilemimeUtils {

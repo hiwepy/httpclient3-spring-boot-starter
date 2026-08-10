@@ -7,7 +7,7 @@ import java.io.IOException;
  * returned a non-2xx status code or because the response body could not be parsed.
  * <p>The offending status code (defaulting to {@code 200}) is exposed via
  * {@link #getStatusCode()}.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @SuppressWarnings("serial")

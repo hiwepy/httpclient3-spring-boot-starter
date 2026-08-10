@@ -18,7 +18,7 @@ import org.apache.http.spring.boot.client.exception.HttpResponseException;
  * <p>The handler treats HTTP status codes {@code 301}, {@code 302}, {@code 303} and
  * {@code 307} as redirects and returns the target URL from the {@code location} response
  * header; any other status code produces an {@link HttpResponseException}.</p>
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class RedirectResponseHandler implements ResponseHandler<String> {

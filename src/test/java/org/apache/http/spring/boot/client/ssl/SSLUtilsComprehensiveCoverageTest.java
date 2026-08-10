@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 /**
  * Comprehensive unit tests for SSL utility classes.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class SSLUtilsComprehensiveCoverageTest {
 

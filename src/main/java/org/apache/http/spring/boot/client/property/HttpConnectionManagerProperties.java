@@ -26,7 +26,7 @@ import org.apache.commons.httpclient.params.HttpMethodParams;
  * {@code httpclient.connection-manager}, exposing the connection-manager type, idle-eviction
  * interval and the {@code alwaysClose} flag in addition to the standard pool/socket tuning
  * parameters.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class HttpConnectionManagerProperties extends HttpConnectionManagerParams {
