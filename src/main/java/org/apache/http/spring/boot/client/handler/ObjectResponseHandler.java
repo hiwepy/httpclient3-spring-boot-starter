@@ -23,6 +23,10 @@ public class ObjectResponseHandler implements ResponseHandler<Object> {
 
 	/** XStream instance used to deserialise the XML response body. */
 	protected XStream xstream = new XStream();
+	/**
+	 * <p>Handle client.</p>
+	 * @param httpclient the httpclient
+	 */
 	
 	@Override
 	public void handleClient(HttpClient httpclient) {

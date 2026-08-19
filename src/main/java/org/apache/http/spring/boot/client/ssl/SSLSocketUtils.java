@@ -26,6 +26,7 @@ import javax.net.ssl.SSLSocket;
 /**
  * General utilities for SSLSocket.
  * @since 3.4
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public class SSLSocketUtils {
     private SSLSocketUtils() {

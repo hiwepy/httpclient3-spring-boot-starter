@@ -25,15 +25,16 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
-/**
- * TrustManager utilities for generating TrustManagers.
- *
- * @since 3.0
- */
 public final class TrustManagerUtils
 {
     private static final X509Certificate[] EMPTY_X509CERTIFICATE_ARRAY = new X509Certificate[]{};
 
+    /**
+     * <p>Manager for trust manager operations.</p>
+     *
+     * @author <a href="https://github.com/loong10k">Loong Wan</a>
+     * @since 1.0.0
+     */
     private static class TrustManager implements X509TrustManager {
 
         private final boolean checkServerValidity;
@@ -50,6 +51,11 @@ public final class TrustManagerUtils
         {
             return;
         }
+        /**
+         * <p>Check server trusted.</p>
+         * @param certificates the certificates
+         * @param authType the auth type
+         */
 
         @Override
         public void checkServerTrusted(X509Certificate[] certificates, String authType)

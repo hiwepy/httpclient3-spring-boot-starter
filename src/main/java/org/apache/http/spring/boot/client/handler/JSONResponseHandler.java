@@ -32,6 +32,10 @@ public class JSONResponseHandler implements ResponseHandler<JSONObject> {
 
 	/** SAX reader used to parse XML response bodies. */
 	protected SAXReader reader = new SAXReader();
+	/**
+	 * <p>Handle client.</p>
+	 * @param httpclient the httpclient
+	 */
 	
 	@Override
 	public void handleClient(HttpClient httpclient) {

@@ -264,7 +264,7 @@ public abstract class HttpClientUtils extends HttpRequestUtils {
 			httpMethod = HttpRequestUtils.getHttpRequest(new PostMethod(baseURL), headers);
 			// 将JSON进行UTF-8encoding,以便传输中文
 			String encoderJson = URLEncoder.encode(json != null ? json : "{}", charset);
-			// 构建字符串参数对象
+			// 构建字符串the configuration properties
 			RequestEntity requestEntity = new StringRequestEntity(encoderJson,ContentType.TEXT_JSON, charset );
 			// setsrequest头info
 			httpMethod.setRequestHeader(HttpHeaders.CONTENT_ENCODING, charset);

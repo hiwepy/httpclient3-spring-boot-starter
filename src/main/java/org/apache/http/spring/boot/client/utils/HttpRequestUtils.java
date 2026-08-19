@@ -258,7 +258,7 @@ public abstract class HttpRequestUtils {
             for (NameValuePair nameValuePair : nameValuePostBodies) {
             	parts.add(new StringPart(nameValuePair.getName(), nameValuePair.getValue(), charset));
             }
-            //初始参数对象
+            //初始the configuration properties
     		if(paramsMap != null && !paramsMap.isEmpty()){
     			//组织参数
     	        Iterator<String> iterator = paramsMap.keySet().iterator();

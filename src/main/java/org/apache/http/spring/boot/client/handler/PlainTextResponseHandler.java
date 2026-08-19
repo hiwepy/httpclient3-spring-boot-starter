@@ -17,6 +17,10 @@ import org.apache.http.spring.boot.client.exception.HttpResponseException;
  * @since 1.0.0
  */
 public class PlainTextResponseHandler implements ResponseHandler<String> {
+	/**
+	 * <p>Handle client.</p>
+	 * @param httpclient the httpclient
+	 */
 
 	@Override
 	public void handleClient(HttpClient httpclient) {

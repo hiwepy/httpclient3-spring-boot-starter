@@ -27,6 +27,10 @@ public class XMLResponseHandler implements ResponseHandler<Document> {
 
 	/** Factory used to create the {@link DocumentBuilder} that parses the response body. */
 	private DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	/**
+	 * <p>Handle client.</p>
+	 * @param httpclient the httpclient
+	 */
 	
 	@Override
 	public void handleClient(HttpClient httpclient) {

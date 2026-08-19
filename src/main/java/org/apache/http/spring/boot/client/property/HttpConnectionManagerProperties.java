@@ -21,23 +21,15 @@ import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
-/**
- * Extended {@link HttpConnectionManagerParams} bound under
- * {@code httpclient.connection-manager}, exposing the connection-manager type, idle-eviction
- * interval and the {@code alwaysClose} flag in addition to the standard pool/socket tuning
- * parameters.
- * @author <a href="https://github.com/loong10k">Loong Wan</a>
- * @since 1.0.0
- */
 public class HttpConnectionManagerProperties extends HttpConnectionManagerParams {
 
-	/** Parameter key for the idle-connection-eviction interval. */
 	public static final String TIMEOUT_INTERVAL = "http.timeout.interval";
-	/** Default idle-connection-eviction interval, in milliseconds (5000). */
 	public static final int  DEFAULT_TIMEOUT_INTERVAL = 5000;
 	
 	/**
 	 * Enumeration of supported connection-manager types.
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
 	 */
 	public enum ManagerType {
 
@@ -142,7 +134,6 @@ public class HttpConnectionManagerProperties extends HttpConnectionManagerParams
 	}
 
 
-
 	/**
 	 * Set whether a {@link SimpleHttpConnectionManager} should always close its underlying
 	 * connection.
@@ -151,7 +142,6 @@ public class HttpConnectionManagerProperties extends HttpConnectionManagerParams
 	public void setAlwaysClose(boolean alwaysClose) {
 		this.alwaysClose = alwaysClose;
 	}
-
 
 
 	/**
@@ -192,31 +182,36 @@ public class HttpConnectionManagerProperties extends HttpConnectionManagerParams
 	private int maxConnectionsPerHost;
 	
 	private int maxTotalConnections;
+	/** Gets the max host connections. */
 
 	public int getMaxHostConnections() {
 		return maxHostConnections;
 	}
+	/** Sets the max host connections. */
 
 	public void setMaxHostConnections(int maxHostConnections) {
 		this.maxHostConnections = maxHostConnections;
 	}
+	/** Gets the max connections per host. */
 
 	public int getMaxConnectionsPerHost() {
 		return maxConnectionsPerHost;
 	}
+	/** Sets the max connections per host. */
 
 	public void setMaxConnectionsPerHost(int maxConnectionsPerHost) {
 		this.maxConnectionsPerHost = maxConnectionsPerHost;
 	}
+	/** Gets the max total connections. */
 
 	public int getMaxTotalConnections() {
 		return maxTotalConnections;
 	}
+	/** Sets the max total connections. */
 
 	public void setMaxTotalConnections(int maxTotalConnections) {
 		this.maxTotalConnections = maxTotalConnections;
 	}*/
-	
 	
 	
 }

@@ -36,32 +36,6 @@ import javax.net.ssl.KeyManager;
 import javax.net.ssl.X509ExtendedKeyManager;
 
 
-/**
- * General KeyManager utilities
- * <p>
- * How to use with a client certificate:
- * <pre>
- * KeyManager km = KeyManagerUtils.createClientKeyManager("JKS",
- *     "/path/to/privatekeystore.jks","storepassword",
- *     "privatekeyalias", "keypassword");
- * FTPSClient cl = new FTPSClient();
- * cl.setKeyManager(km);
- * cl.connect(...);
- * </pre>
- * If using the default store type and the key password is the same as the
- * store password, these parameters can be omitted. <br>
- * If the desired key is the first or only key in the keystore, the keyAlias parameter
- * can be omitted, in which case the code becomes:
- * <pre>
- * KeyManager km = KeyManagerUtils.createClientKeyManager(
- *     "/path/to/privatekeystore.jks","storepassword");
- * FTPSClient cl = new FTPSClient();
- * cl.setKeyManager(km);
- * cl.connect(...);
- * </pre>
- *
- * @since 3.0
- */
 public final class KeyManagerUtils {
 
     private static final String DEFAULT_STORE_TYPE = KeyStore.getDefaultType();
@@ -70,16 +44,6 @@ public final class KeyManagerUtils {
         // Not instantiable
     }
 
-    /**
-     * Create a client key manager which returns a particular key.
-     * Does not handle server keys.
-     *
-     * @param ks the keystore to use
-     * @param keyAlias the alias of the key to use, may be {@code null} in which case the first key entry alias is used
-     * @param keyPass the password of the key to use
-     * @return the customised KeyManager
-     * @throws GeneralSecurityException if there is a problem creating the keystore
-     */
     public static KeyManager createClientKeyManager(KeyStore ks, String keyAlias, String keyPass)
         throws GeneralSecurityException
     {
@@ -87,19 +51,6 @@ public final class KeyManagerUtils {
         return new X509KeyManager(cks);
     }
 
-    /**
-     * Create a client key manager which returns a particular key.
-     * Does not handle server keys.
-     *
-     * @param storeType the type of the keyStore, e.g. "JKS"
-     * @param storePath the path to the keyStore
-     * @param storePass the keyStore password
-     * @param keyAlias the alias of the key to use, may be {@code null} in which case the first key entry alias is used
-     * @param keyPass the password of the key to use
-     * @return the customised KeyManager
-     * @throws GeneralSecurityException if there is a problem creating the keystore
-     * @throws IOException if there is a problem creating the keystore
-     */
     public static KeyManager createClientKeyManager(
             String storeType, File storePath, String storePass, String keyAlias, String keyPass)
         throws IOException, GeneralSecurityException
@@ -108,36 +59,12 @@ public final class KeyManagerUtils {
         return createClientKeyManager(ks, keyAlias, keyPass);
     }
 
-    /**
-     * Create a client key manager which returns a particular key.
-     * Does not handle server keys.
-     * Uses the default store type and assumes the key password is the same as the store password
-     *
-     * @param storePath the path to the keyStore
-     * @param storePass the keyStore password
-     * @param keyAlias the alias of the key to use, may be {@code null} in which case the first key entry alias is used
-     * @return the customised KeyManager
-     * @throws IOException if there is a problem creating the keystore
-     * @throws GeneralSecurityException if there is a problem creating the keystore
-     */
     public static KeyManager createClientKeyManager(File storePath, String storePass, String keyAlias)
         throws IOException, GeneralSecurityException
     {
         return createClientKeyManager(DEFAULT_STORE_TYPE, storePath, storePass, keyAlias, storePass);
     }
 
-    /**
-     * Create a client key manager which returns a particular key.
-     * Does not handle server keys.
-     * Uses the default store type and assumes the key password is the same as the store password.
-     * The key alias is found by searching the keystore for the first private key entry
-     *
-     * @param storePath the path to the keyStore
-     * @param storePass the keyStore password
-     * @return the customised KeyManager
-     * @throws IOException if there is a problem creating the keystore
-     * @throws GeneralSecurityException if there is a problem creating the keystore
-     */
     public static KeyManager createClientKeyManager(File storePath, String storePass)
         throws IOException, GeneralSecurityException
     {
@@ -199,6 +126,12 @@ public final class KeyManagerUtils {
         }
     }
 
+    /**
+     * <p>Manager for x509 key manager operations.</p>
+     *
+     * @author <a href="https://github.com/loong10k">Loong Wan</a>
+     * @since 1.0.0
+     */
     private static class X509KeyManager extends X509ExtendedKeyManager  {
 
         private final ClientKeyStore keyStore;
@@ -215,10 +148,12 @@ public final class KeyManagerUtils {
         }
 
         // Call sequence: 2
+        /** Gets the certificate chain. */
         @Override
         public X509Certificate[] getCertificateChain(String alias) {
             return keyStore.getCertificateChain();
         }
+        /** Gets the client aliases. */
 
         @Override
         public String[] getClientAliases(String keyType, Principal[] issuers) {
@@ -226,15 +161,24 @@ public final class KeyManagerUtils {
         }
 
         // Call sequence: 3
+        /** Gets the private key. */
         @Override
         public PrivateKey getPrivateKey(String alias) {
             return keyStore.getPrivateKey();
         }
+        /** Gets the server aliases. */
 
         @Override
         public String[] getServerAliases(String keyType, Principal[] issuers) {
             return null;
         }
+        /**
+         * <p>Choose server alias.</p>
+         * @param keyType the key type
+         * @param issuers the issuers
+         * @param socket the socket
+         * @return the string
+         */
 
         @Override
         public String chooseServerAlias(String keyType, Principal[] issuers, Socket socket) {

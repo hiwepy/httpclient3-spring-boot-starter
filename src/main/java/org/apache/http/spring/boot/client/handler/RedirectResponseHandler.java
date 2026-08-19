@@ -24,6 +24,10 @@ import org.apache.http.spring.boot.client.exception.HttpResponseException;
 public class RedirectResponseHandler implements ResponseHandler<String> {
 
 	protected static Logger LOG = LoggerFactory.getLogger(RedirectResponseHandler.class);
+	/**
+	 * <p>Handle client.</p>
+	 * @param httpclient the httpclient
+	 */
 
 	@Override
 	public void handleClient(HttpClient httpclient) {

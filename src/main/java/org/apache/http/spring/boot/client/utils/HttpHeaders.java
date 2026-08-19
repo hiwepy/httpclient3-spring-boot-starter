@@ -6,6 +6,7 @@ package org.apache.http.spring.boot.client.utils;
  * (WebDAV) are listed.
  *
  * @since 4.1
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public final class HttpHeaders {
 
